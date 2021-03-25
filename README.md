@@ -28,7 +28,7 @@ To keep in touch and keep this organized, *PLEASE* use this gitlabs [Issue Track
 * Module Version
 * System and System version
 
-![Example](data/graph.jpg)
+![Example](./images/graph.jpg)
 
 ## Getting Started
 ### Installing the module
@@ -36,7 +36,7 @@ Install the module by choosing it inside  FVTTs module browser or pasting the [M
 
 ### Creating your first graph
 Start up FVTT, connect to a world, choosee a Journal Entry and click on *MindMap* in the titlebar. Now you will see a canvas filling the journal, just drag Entities from the sidbar onto it. If you drag an entity onto an already existing Node it will automatically create a directed edge from the existing node to the newly created one.  
-![Usage](data/first_steps.gif)
+![Usage](./images/first_steps.gif)
 
 ## Advanced
 ### View the nodes sheet
@@ -91,7 +91,3 @@ This project uses the [Foundry Project Creator](https://gitlab.com/foundry-proje
 ## License
 This module is licensed under [GNU LGPL v3](https://gitlab.com/moerills-fvtt-modules/Adnd5e/raw/master/LICENSE) and Foundry Virtual Tabletops [Limited License Agreement For Module Development](https://foundryvtt.com/article/license/).
 
-## Support the devlopment
-Want to help me devlop? Send a merge request on this gitlab or contact me on Discord (Moerill#7205).  
-Want to support me in another way? 
-Leave me some nice comments (e.g. on Discord), recommend this module to others and/or leave a donation over at my [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FYZ294SP2JBGS&source=url).
