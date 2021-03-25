@@ -1,38 +1,41 @@
 # **MINDMAP** - Moerills Indecision Negator, Decision Maker, And Planner
 
-[Mindmap](https://gitlab.com/moerills-fvtt-modules/graphs) ty to [Moerill](https://github.com/Moerill/)
+
 
 ## This is currently a BETA release!
 
+<!-- 
 ![FVTT Version](https://img.shields.io/badge/FVTT-%3E%3D%200.5.5-critical)  
 [![LGPLv3](https://img.shields.io/badge/License-GNU%20LGPLv3-black?style=flat-square)](https://gitlab.com/moerills-fvtt-modules/Adnd5e/raw/master/LICENSE) 
-[![PayPal](https://img.shields.io/badge/Donate-PayPal-blue?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FYZ294SP2JBGS&source=url)  
+[![PayPal](https://img.shields.io/badge/Donate-PayPal-blue?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FYZ294SP2JBGS&source=url)   
+-->
 
 This module for [Foundry VTT](https://foundryvtt.com/) adds a third view to each Journal Entry: The MindMap View.  
 In this view you organize you can create a network graph for organizing your relations, flow charts, campaign structures, ideas or whatever you can imagine! Just Drag the data from the sidebar to begin planning.
 
+![Example](./images/graph.jpg)
 ## ~~ READ FIRST ~~
+
 This module is still in a BETA version!  
 This being said i'm pretty confident that the basic usage does work rather well.  
 This release is mainly to gather feedback on usage and gather feature suggestions.
-To keep in touch and keep this organized, *PLEASE* use this gitlabs [Issue Tracker](https://gitlab.com/moerills-fvtt-modules/graphs/-/issues) for suggestions and bugs. Also before you submit an issue or suggestion, make sure its not submitted already.  
-### Bug Report checklist
-* Disabled all other modules, try to reproduce bugs
-* Detailed Bug description:
-	- What happened?
-	- What did you expect to happen?
-	- Is it reproducible?
-		* If yes: how?
-		* If no: What did you do before it happened?
-* FVTT Version
-* Module Version
-* System and System version
+To keep in touch and keep this organized, *PLEASE* use this gitlabs [Issue Tracker](https://github.com/p4535992/foundryvtt-mindmap/issues) for suggestions and bugs. Also before you submit an issue or suggestion, make sure its not submitted already.  
 
-![Example](./images/graph.jpg)
+## Installation
 
-## Getting Started
-### Installing the module
-Install the module by choosing it inside  FVTTs module browser or pasting the [Manifest URL](https://gitlab.com/moerills-fvtt-modules/graphs/-/raw/master/dist/module.json) into its field.
+It's always easiest to install modules from the in game add-on browser.
+
+To install this module manually:
+1.  Inside the Foundry "Configuration and Setup" screen, click "Add-on Modules"
+2.  Click "Install Module"
+3.  In the "Manifest URL" field, paste the following url:
+`https://raw.githubusercontent.com/p4535992/coloredeffects/master/src/module.json`
+4.  Click 'Install' and wait for installation to complete
+5.  Don't forget to enable the module in game using the "Manage Module" button
+
+### libWrapper
+
+This module uses the [libWrapper](https://github.com/ruipin/fvtt-lib-wrapper) library for wrapping core methods. It is a hard dependency and it is recommended for the best experience and compatibility with other modules.
 
 ### Creating your first graph
 Start up FVTT, connect to a world, choosee a Journal Entry and click on *MindMap* in the titlebar. Now you will see a canvas filling the journal, just drag Entities from the sidbar onto it. If you drag an entity onto an already existing Node it will automatically create a directed edge from the existing node to the newly created one.  
@@ -82,12 +85,29 @@ This project uses [Cytoscape.js](https://js.cytoscape.org/) licensed under the M
 * [CxtMenu](https://github.com/cytoscape/cytoscape.js-cxtmenu)
 * [Compound Drag and Drop](https://github.com/cytoscape/cytoscape.js-compound-drag-and-drop)
 
-All layouts used are linked aboce and licensed under the MIT license.
+All layouts used are linked above and licensed under the MIT license.
 
 Art used as placeholder images for nodes does come from (game-icons.net)[https://www.game-icons.net] and is licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
 
 This project uses the [Foundry Project Creator](https://gitlab.com/foundry-projects/foundry-pc/create-foundry-project) by N. van Oosten. 
 
 ## License
-This module is licensed under [GNU LGPL v3](https://gitlab.com/moerills-fvtt-modules/Adnd5e/raw/master/LICENSE) and Foundry Virtual Tabletops [Limited License Agreement For Module Development](https://foundryvtt.com/article/license/).
+This module is licensed under [GNU LGPL v3](https://raw.githubusercontent.com/p4535992/foundryvtt-mindmap/master/LICENSE) and Foundry Virtual Tabletops [Limited License Agreement For Module Development](https://foundryvtt.com/article/license/).
 
+## [Changelog](./changelog.md)
+
+## Feedback
+
+Any issues, bugs, or feature requests are always welcome to be reported directly to the [Issue Tracker](https://github.com/p4535992/foundryvtt-mindmap/issues )
+
+## Acknowledgements
+
+Bootstrapped with Nick East's [create-foundry-project](https://gitlab.com/foundry-projects/foundry-pc/create-foundry-project).
+
+Mad props to the 'League of Extraordinary FoundryVTT Developers' community which helped me figure out a lot.
+
+## Credit
+
+Thanks to anyone who helps me with this code! I appreciate the user community's feedback on this project!
+
+- [Mindmap](https://gitlab.com/moerills-fvtt-modules/graphs) ty to [Moerill](https://github.com/Moerill/)

@@ -1,4 +1,5 @@
-import { log } from '../module/util/log.js';
+import { debug, log } from '../foundryvtt-mindmap';
+import { MODULE_NAME } from './settings';
 
 let cytoscape;
 
@@ -18,12 +19,12 @@ async function importExtensions() {
 		'cytoscape-edgehandles')).default;
 	const cxtmenu = (await import(
   	/* webpackPrefetch: true */
-		/* webpackChunkName: "cxtmenu" */ 
+		/* webpackChunkName: "cxtmenu" */
 		'cytoscape-cxtmenu')).default;
 
 	const compoundDragAndDrop = (await import(
 		/* webpackPrefetch: true */
-		/* webpackChunkName: "compound-drag-and-drop" */ 
+		/* webpackChunkName: "compound-drag-and-drop" */
 		'cytoscape-compound-drag-and-drop')).default;
 
 	cytoscape.use(compoundDragAndDrop);
@@ -34,38 +35,38 @@ async function importExtensions() {
 
 /**
  * Lazy load module by name
- * @param {*} name 
+ * @param {*} name
  */
 async function loadLayout(name) {
 	const layout = (await {
 			dagre: async () => import(
 				/* webpackPrefetch: true */
-		/* webpackChunkName: "dagre" */ 
+		/* webpackChunkName: "dagre" */
 				'cytoscape-dagre'
 			),
 			klay: async () => import(
 				/* webpackPrefetch: true */
-		/* webpackChunkName: "klay" */ 
+		/* webpackChunkName: "klay" */
 				'cytoscape-klay'
 			),
 			cola: async () => import(
 				/* webpackPrefetch: true */
-		/* webpackChunkName: "cola" */ 
+		/* webpackChunkName: "cola" */
 				'cytoscape-cola'
 			),
 			fcose: async () => import(
 				/* webpackPrefetch: true */
-		/* webpackChunkName: "fcose" */ 
+		/* webpackChunkName: "fcose" */
 				'cytoscape-fcose'
 			),
 			cise: async () => import(
 				/* webpackPrefetch: true */
-		/* webpackChunkName: "cise" */ 
+		/* webpackChunkName: "cise" */
 				'cytoscape-cise'
 			),
 			spread: async () => import(
 				/* webpackPrefetch: true */
-		/* webpackChunkName: "spread" */ 
+		/* webpackChunkName: "spread" */
 				'cytoscape-spread'
 			),
 		}[name]()).default;
@@ -77,26 +78,28 @@ const dblClickTime = 300;
 
 export class Graph {
 	constructor(container, journal, options = {}) {
-		this._style = [...this.defaultStyle, ...(options.style || [])];
-		this._layout = {...this.defaultLayout, ...(options.layout || {})};
-		this._journal = journal;
-		this._container = container;
+		this['_style'] = [...this.defaultStyle, ...(options['style'] || [])];
+		this['_layout'] = {...this.defaultLayout, ...(options['layout'] || {})};
+		this['_journal'] = journal;
+		this['_container'] = container;
 
-		this._selectedNode = null;
-		this._dragTime = null;
+		this['_selectedNode'] = null;
+		this['_dragTime'] = null;
 	}
 
 	async init() {
-		if (!cytoscape)
+		if (!cytoscape){
 			await initCytoscape();
-		if (!extensionsImported)
+    }
+		if (!extensionsImported){
 			await importExtensions();
-		const journal = this._journal;
-		const container = this._container;
-		let json = journal.getFlag('mindmap', 'data') || {elements: {}};
+    }
+		const journal = this['_journal'];
+		const container = this['_container'];
+		let json = journal.getFlag(MODULE_NAME, 'data') || {elements: {}};
 
 		if (!json.elements.nodes) {
-			json.elements = 
+			json.elements =
 				[
 					{
 						data: {
@@ -112,56 +115,56 @@ export class Graph {
 
 		if (json.layout) {
 			let layout = Graph.layouts.find(e => e.name === json.layout.name);
-			this._layout = {...this.defaultLayout, ...layout};
+			this['_layout'] = {...this.defaultLayout, ...layout};
 		} else
-			this._layout = this.defaultLayout;
+			this['_layout'] = this.defaultLayout;
 
-		console.log('MINDMAP | Initializing.. ', json, this)
-		this._cy = cytoscape.default({
-			container: container, 
+		log('Initializing.. ', json, this)
+		this['_cy'] = cytoscape.default({
+			container: container,
 			elements: json.elements,
 			layout: {name: "preset"},
-			style: this._style,
+			style: this['_style'],
 			boxSelectionEnabled: true,
 			autoungrabify: journal.permission < CONST.ENTITY_PERMISSIONS.OWNER ? true : false,
 			autounselectify: journal.permission < CONST.ENTITY_PERMISSIONS.OWNER ? true : false
 		});
-		window.cy = this._cy;
+		window['cy'] = this['_cy'];
 
-		const cdnd = this._cy.compoundDragAndDrop();
+		const cdnd = this['_cy'].compoundDragAndDrop();
 		cdnd.enable();
 
 		await this.update();
-		this._cy.nodes().unselect();
-		
+		this['_cy'].nodes().unselect();
+
 		// Open Entity with double clicked
-		this._cy.on('click', 'node', ev => this._onDblClick(ev));
+		this['_cy'].on('click', 'node', ev => this._onDblClick(ev));
 
-		if (journal.permission < CONST.ENTITY_PERMISSIONS.OWNER) 
+		if (journal.permission < CONST.ENTITY_PERMISSIONS.OWNER){
 			return;
-		
+    }
 
-		this._eh = this._cy.edgehandles( {
+		this['_eh'] = this['_cy'].edgehandles( {
 			snap: true,
 			stop: (sourceNode, targetNode, addedEles) => {
-				this._eh.disable();
+				this['_eh'].disable();
 			},
 			complete: (sourceNode, targetNode, addedEles) => {
-				console.log('MINDMAP | ', sourceNode, targetNode, addedEles, this._cy.json().elements)
-				
+				log(sourceNode, targetNode, addedEles, this['_cy'].json().elements)
+
 				this.saveDataToJournal()
 			}
 		} );
-		this._eh.hide();
-		this._eh.disable();
+		this['_eh'].hide();
+		this['_eh'].disable();
 		const cxtMenues = this.cxtMenuCommands;
 		for (let menu of cxtMenues) {
-			this._cy.cxtmenu(menu);
+			this['_cy'].cxtmenu(menu);
 		}
 
 
 		// Save after finishing dragging a node, but only if layout is preset
-		this._cy.on('free', 'node', ev => { this.saveDataToJournal();	});
+		this['_cy'].on('free', 'node', ev => { this.saveDataToJournal();	});
 
 		container.addEventListener('dragover', ev => this._onDragOver(ev));
 		container.addEventListener('dragenter', ev => this._onDragEnter(ev));
@@ -172,46 +175,46 @@ export class Graph {
 		let ret = [];
 
 		const modifyLabel = { // modify label
-						fillColor: 'rgba(50, 50, 50, 0.75)', 
-						content: '<i class="fas fa-tag"></i><br>Modify label', 
-						contentStyle: {}, 
+						fillColor: 'rgba(50, 50, 50, 0.75)',
+						content: '<i class="fas fa-tag"></i><br>Modify label',
+						contentStyle: {},
 						select: (ele) => this._modifyData(ele, 'name', 'text'),
-						enabled: true 
+						enabled: true
 					};
-					
+
 		let node = [
 			{ // delete
-				fillColor: 'rgba(200, 50, 50, 0.75)', 
+				fillColor: 'rgba(200, 50, 50, 0.75)',
 				content: '<i class="fa fa-trash" aria-hidden="true"></i><br>Remove<br>Node',
 				select: (ele) => this.removeElement(ele),
 				enabled: true
 			},
 			{ // mark visited
-				fillColor: 'rgba(50, 50, 50, 0.75)', 
-				content: 'Toggle visited', 
-				select: (ele) => { 
+				fillColor: 'rgba(50, 50, 50, 0.75)',
+				content: 'Toggle visited',
+				select: (ele) => {
 					ele.toggleClass('visited');
 					this.saveDataToJournal();
 				},
-				enabled: true 
+				enabled: true
 			},
 			{ // add edge
-				fillColor: 'rgba(50, 50, 50, 0.75)', 
-				content: 'Add<br>Edge', 
-				select: (ele) => { 
-					this._eh.enable();
-					this._eh.start(ele); 
+				fillColor: 'rgba(50, 50, 50, 0.75)',
+				content: 'Add<br>Edge',
+				select: (ele) => {
+					this['_eh'].enable();
+					this['_eh'].start(ele);
 				},
-				enabled: true 
-			}, 
+				enabled: true
+			},
 			{ // Add text node
-				fillColor: 'rgba(50, 50, 50, 0.75)', 
-				content: 'Add<br>Textnode', 
-				select: async (ele) => { 
+				fillColor: 'rgba(50, 50, 50, 0.75)',
+				content: 'Add<br>Textnode',
+				select: async (ele) => {
 					const node = await this.addNode(null, ele.renderedPosition());
 					this.addEdge(ele.data().id, node.data().id, true);
 				},
-				enabled: true 	
+				enabled: true
 			},
 			modifyLabel,
 		];
@@ -219,27 +222,27 @@ export class Graph {
 				...node
 				, ...[
 					{ // show entity
-						fillColor: 'rgba(50, 50, 50, 0.75)', 
+						fillColor: 'rgba(50, 50, 50, 0.75)',
 						content: '<i class="fas fa-eye"></i><br>Open Sheet',
 						select: (ele) => this._showEntity(ele.data().uuid),
-						enabled: true 
+						enabled: true
 					},
 				]
 			];
 
 		ret.push({
-			selector: '.scene', 
+			selector: '.scene',
 			commands: [
 				...node,
 				...[
 					{ // Activate Scene
-						fillColor: 'rgba(50, 50, 50, 0.75)', 
+						fillColor: 'rgba(50, 50, 50, 0.75)',
 						content: '<i class="fas fa-bullseye fa-fw"></i><br>Activate',
 						select: async (ele) => {
 							const entity = await fromUuid(ele.data().uuid);
 							entity.activate();
 						},
-						enabled: true 
+						enabled: true
 					},
 
 				]
@@ -293,25 +296,25 @@ export class Graph {
 			selector: 'edge',
 			commands: [
 				{ // delete
-					fillColor: 'rgba(200, 50, 50, 0.75)', 
-					content: '<i class="fa fa-trash" aria-hidden="true"></i><br>Remove<br>Edge', 
+					fillColor: 'rgba(200, 50, 50, 0.75)',
+					content: '<i class="fa fa-trash" aria-hidden="true"></i><br>Remove<br>Edge',
 					select: (ele) => this.removeElement(ele),
-					enabled: true 
+					enabled: true
 				},
 				{ // Toggle direction
 					fillColor: 'rgba(50, 50, 50, 0.75)',
-					content: '<i class="fas fa-map-signs"></i><br>Toggle direction', 
-					contentStyle: {}, 
+					content: '<i class="fas fa-map-signs"></i><br>Toggle direction',
+					contentStyle: {},
 					select: (ele) => this._toggleEdgeDirection(ele),
 					enabled: true
 				},
 				modifyLabel,
 				{ // modify color
-					fillColor: 'rgba(50, 50, 50, 0.75)', 
-					content: '<i class="fas fa-palette"></i><br>Change Color', 
-					contentStyle: {}, 
+					fillColor: 'rgba(50, 50, 50, 0.75)',
+					content: '<i class="fas fa-palette"></i><br>Change Color',
+					contentStyle: {},
 					select: (ele) => this._modifyData(ele, 'color', 'color'),
-					enabled: true 
+					enabled: true
 				}
 			]
 		})
@@ -405,25 +408,25 @@ export class Graph {
 			{
 				selector: '.journal-entry',
 				style: {
-					'background-image': 'modules/mindmap/assets/open-book.png'
+					'background-image':  `/modules/${MODULE_NAME}/assets/open-book.png` //'modules/mindmap/assets/open-book.png'
 				},
 			},
 			{
 				selector: '.actor',
 				style: {
-					'background-image': 'modules/mindmap/assets/person.png'
+					'background-image': `/modules/${MODULE_NAME}/assets/assets/person.png` //'modules/mindmap/assets/person.png'
 				},
 			},
 			{
 				selector: '.item',
 				style: {
-					'background-image': 'modules/mindmap/assets/suitcase.png'
+					'background-image': `/modules/${MODULE_NAME}/assets/assets/suitcase.png` //'modules/mindmap/assets/suitcase.png'
 				},
 			},
 			{
 				selector: '.roll-table',
 				style: {
-					'background-image': 'modules/mindmap/assets/rolling-dices.png'
+					'background-image': `/modules/${MODULE_NAME}/assets/assets/rolling-dices.png` //'modules/mindmap/assets/rolling-dices.png'
 				}
 			},
 			{
@@ -493,8 +496,8 @@ export class Graph {
 		const layout = Graph.layouts.find(e => e.name === name);
 		if (!layout)
 			throw new Error('Graphs | Layout not found!');
-		
-		this._layout = {...this.defaultLayout, ...layout};
+
+		this['_layout'] = {...this.defaultLayout, ...layout};
 		this.saveDataToJournal();
 	}
 
@@ -513,9 +516,9 @@ export class Graph {
 		let  nodeData;
 		if (entity) {
 			nodeData = {
-				data: { 
-					// id: entity.id || entity._id, 
-					name: entity.name, 
+				data: {
+					// id: entity.id || entity._id,
+					name: entity.name,
 					type: entity.entity,
 					uuid: entity.uuid
 				},
@@ -531,7 +534,7 @@ export class Graph {
 				nodeData.data.img = entity.img || entity.data.img;
 				nodeData.classes.push('img');
 			}
-			
+
 		} else { // Textnode
 			nodeData = {
 				data: {
@@ -546,11 +549,11 @@ export class Graph {
 		if (position) {
 			nodeData.renderedPosition = position
 		}
-	
 
-		const node = this._cy.add( nodeData );
 
-		if (run) 
+		const node = this['_cy'].add( nodeData );
+
+		if (run)
 			this.saveDataToJournal();
 
 		return node;
@@ -563,7 +566,7 @@ export class Graph {
 				target: targetId,
 			}
 		};
-		const edge = this._cy.add( edgeData );
+		const edge = this['_cy'].add( edgeData );
 		if (run) {
 
 			this.saveDataToJournal();
@@ -576,12 +579,12 @@ export class Graph {
 	}
 
 	async _onDropEntity(ev) {
-    event.preventDefault();
+    ev.preventDefault();
 
     // Try to extract the data
     let data;
     try {
-      data = JSON.parse(event.dataTransfer.getData('text/plain'));
+      data = JSON.parse(ev.dataTransfer.getData('text/plain'));
     }
     catch (err) {
       return false;
@@ -606,7 +609,7 @@ export class Graph {
 		}
 
 		const mousePos = {x: ev.offsetX, y: ev.offsetY}
-		const closest = this._selectedNode;
+		const closest = this['_selectedNode'];
 
 		let node;
 		try {
@@ -617,117 +620,126 @@ export class Graph {
 			return false;
 		}
 
-		if (closest)
+		if (closest){
 			this.addEdge(closest.data().id, node.data().id, true);
-
-		if (this._selectedNode) {
-			this._selectedNode.unselect();
-			this._selectedNode = null;
+    }
+		if (this['_selectedNode']) {
+			this['_selectedNode'].unselect();
+			this['_selectedNode'] = null;
 		}
 
 		return;
 	}
 
 	async _onDragOver(ev) {
-		if ((ev.timeStamp - this._dragTime) < 50) return;
-
-		this._dragTime = ev.timeStamp;
-		const nodes = this._cy.nodes();
+		if ((ev.timeStamp - this['_dragTime']) < 50){
+      return;
+    }
+		this['_dragTime'] = ev.timeStamp;
+		const nodes = this['_cy'].nodes();
 		if (nodes.length === 0) return;
 		let radius = nodes[0].renderedWidth();
 		const pos = {x: ev.offsetX, y: ev.offsetY};
-		if (this._selectedNode)
-			this._selectedNode.unselect();
-		this._selectedNode = null;
+		if (this['_selectedNode']){
+			this['_selectedNode'].unselect();
+    }
+		this['_selectedNode'] = null;
 		nodes.forEach(el => {
 			let nodePos = el.renderedPosition();
 			let dist = Math.abs(nodePos.x - pos.x) + Math.abs(nodePos.y - pos.y);
 			if (dist < radius) {
 				dist = radius;
-				this._selectedNode = el;
+				this['_selectedNode'] = el;
 			};
 		})
-		if (this._selectedNode)
-			this._selectedNode.select();
+		if (this['_selectedNode']){
+			this['_selectedNode'].select();
+    }
 	}
 
 	async _onDragEnter(ev) {
-		this._cy.nodes().unselect();
+		this['_cy'].nodes().unselect();
 	}
 
 	async saveDataToJournal() {
-		console.debug('MINDMAP | Saving Data...')
+		debug('Saving Data...')
 		// this._cy.one('layoutstop', ev => this._cy.animation({
-		// 		complete: this._journal.setFlag('mindmap', 'data', this._cy.json()),
+		// 		complete: this._journal.setFlag(MODULE_NAME, 'data', this._cy.json()),
 		// 		fit: this._cy,
 		// 		duration: 300
 		// 	}).play()
 		// );
-		// this._cy.one('layoutstop', ev => this._journal.setFlag('mindmap', 'data', this._cy.json()));
+		// this._cy.one('layoutstop', ev => this._journal.setFlag(MODULE_NAME, 'data', this._cy.json()));
 
-		this._cy.nodes('.eh-ghost').remove();
+		this['_cy'].nodes('.eh-ghost').remove();
 		// Make sure "edges"  gets deleted!
-		let elements = this._cy.json().elements;
-		if (!elements.edges || elements.edges.length === 0)
+		let elements = this['_cy'].json().elements;
+		if (!elements.edges || elements.edges.length === 0){
 			elements["-=edges"] = null;
+    }
 
-		if (!elements.nodes || elements.nodes.length === 0)
+		if (!elements.nodes || elements.nodes.length === 0){
 			elements["-=nodes"] = null;
-		
+    }
+
 		let udata = {
 			elements,
-			layout: this._layout
+			layout: this['_layout']
 		}
 
 		// Save data after layout has stopped, to reduce differencees after reopening the journal
-		this._cy.one('layoutstop', ev => {
-			let elements = this._cy.json().elements;
-			if (!elements.edges || elements.edges.length === 0)
+		this['_cy'].one('layoutstop', ev => {
+			let elements = this['_cy'].json().elements;
+			if (!elements.edges || elements.edges.length === 0){
 				elements["-=edges"] = null;
-	
-			if (!elements.nodes || elements.nodes.length === 0)
+      }
+
+			if (!elements.nodes || elements.nodes.length === 0){
 				elements["-=nodes"] = null;
-			
+      }
+
 			let udata = {
 				elements,
-				layout: this._layout
+				layout: this['_layout']
 			}
-			this._journal.setFlag('mindmap', 'data', udata)
+			this['_journal'].setFlag(MODULE_NAME, 'data', udata)
 		});
 		this.update(udata);
 	}
 
 	/**
 	 * Checks if double left click, if yes, show the entities sheet.
-	 * @param {Event} ev 
+	 * @param {Event} ev
 	 */
 	_onDblClick(ev)  {
-		this._rightClicked = null;
-		if (this._clicked
-			&& Math.abs(this._clicked.time - ev.timeStamp) < dblClickTime
-			&& (this._clicked.target === ev.target.data().id)) {
+		this['_rightClicked'] = null;
+		if (this['_clicked']
+			&& Math.abs(this['_clicked'].time - ev.timeStamp) < dblClickTime
+			&& (this['_clicked'].target === ev.target.data().id)) {
 				ev.preventDefault();
 				ev.stopPropagation();
 
-				if (ev.target.data('uuid'))		
+				if (ev.target.data('uuid')){
 					this._showEntity(ev.target.data().uuid);
-				this._clicked = null;
-		} else	
-			this._clicked = {
+        }
+				this['_clicked'] = null;
+		} else{
+			this['_clicked'] = {
 				time: ev.timeStamp,
 				target: ev.target.data().id
 			}
+    }
 	}
 
 	/**
 	 * Show entity sheet to a given uuid.
-	 * @param {string} uuid 
+	 * @param {string} uuid
 	 */
 	async _showEntity(uuid) {
 		let entity = await fromUuid(uuid);
 
 		if (!entity.entity) // owned item
-			entity = new CONFIG.Item.entityClass(entity);
+			entity = new CONFIG.Item.entityClass(entity,null);
 
 		if (entity.permission > CONST.ENTITY_PERMISSIONS.NONE)
 			entity.sheet.render(true);
@@ -736,7 +748,7 @@ export class Graph {
 	/**
 	 * Toggles direction of an edge.
 	 * directed -> undirected -> turned around -> undirecter -> directed
-	 * @param {Edge} edge 
+	 * @param {Edge} edge
 	 */
 	async _toggleEdgeDirection(edge) {
 		if (edge.hasClass('undirected')) {
@@ -748,7 +760,7 @@ export class Graph {
 			data.target = source;
 			edge.remove();
 			delete(data.id);
-			this._cy.add({data});
+			this['_cy'].add({data});
 
 		} else {
 			edge.addClass('undirected');
@@ -758,32 +770,34 @@ export class Graph {
 
 	/**
 	 * Updates the graph with given json data.
-	 * @param {Object} udata 
+	 * @param {Object} udata
 	 */
-	async update(udata = {}) {
-		if (!this._cy) return;
+	async update(udata:any = {}) {
+		if (!this['_cy']){
+      return;
+    }
 		if (udata.elements) {
 			const elements = udata.elements;
-			this._cy.json({elements});
+			this['_cy'].json({elements});
 		}
 		if (udata.layout)
-			this._layout = {...this.defaultLayout, ...udata.layout};
+			this['_layout'] = {...this.defaultLayout, ...udata.layout};
 
 		// Load layout if not already done
-		if (!this._cy.extension('layout', this._layout.name))
-			await loadLayout(this._layout.name);
+		if (!this['_cy'].extension('layout', this['_layout'].name))
+			await loadLayout(this['_layout'].name);
 
-		this._cy.layout(this._layout).run();
+		this['_cy'].layout(this['_layout']).run();
 
-		this._cy.resize();
-		this._cy.fit();
+		this['_cy'].resize();
+		this['_cy'].fit();
 	}
 
 	async _modifyData(ele, dataName, type) {
-		let input = document.createElement('input');
+		let input:any = document.createElement('input');
 		const data = ele.data(dataName) || "";
 		input.value = data;
-		input.type = type; 
+		input.type = type;
 		input.style.position = 'absolute';
 		input.style.left = '-500px';
 		input.style.top = '-100px';
@@ -811,29 +825,30 @@ export class Graph {
 			ev.preventDefault();
 			ev.stopPropagation();
 
-			if (ev.key === 'Escape') input.value = name;
-
+			if (ev.key === 'Escape'){
+         input.value = name;
+      }
 			ev.currentTarget.blur();
 		});
 		// input.style.display = 'none';
-		await this._container.appendChild(input);
+		await this['_container'].appendChild(input);
 		input.focus();
 		input.click();
-		window.input = input;
+		window['input'] = input;
 	}
 
 	fit() {
-		this._cy.fit();
-		this._cy.resize();
+		this['_cy'].fit();
+		this['_cy'].resize();
 	}
 
 	removeSelected() {
-		this._cy.nodes(':selected').remove();
+		this['_cy'].nodes(':selected').remove();
 		this.saveDataToJournal();
 	}
 
 	destroy() {
-		if (this._cy)
-			this._cy.destroy();
+		if (this['_cy'])
+			this['_cy'].destroy();
 	}
 }
