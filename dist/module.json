@@ -1,0 +1,14 @@
+{
+	"name": "mindmap",
+	"title": "M.I.N.D.M.A.P. - Moerills Indecision Negator, Decision Maker, And Planner",
+	"description": "Adds a new view to Journal Entries for creating mind map like graphs. In this view you can create a network graph for organizing your relations, flow charts, campaign structures, ideas or whatever you can imagine! Just drag the data from the sidebar to begin planning.",
+	"version": "0.5.1",
+	"author": "Moerill",
+	"scripts": ["graph.js"],
+	"styles": ["graphs.css"],
+	"minimumCoreVersion": "0.5.5",
+	"compatibleCoreVersion": "0.5.5",
+	"url": "https://gitlab.com/moerills-fvtt-modules/graphs",
+	"manifest": "https://gitlab.com/moerills-fvtt-modules/graphs/raw/master/src/module.json",
+	"download": "https://gitlab.com/moerills-fvtt-modules/graphs/raw/v0.5.1/package/mindmap-v0.5.1.zip"
+}
