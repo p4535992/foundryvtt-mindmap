@@ -29,7 +29,7 @@ To install this module manually:
 1.  Inside the Foundry "Configuration and Setup" screen, click "Add-on Modules"
 2.  Click "Install Module"
 3.  In the "Manifest URL" field, paste the following url:
-`https://raw.githubusercontent.com/p4535992/coloredeffects/master/src/module.json`
+`https://raw.githubusercontent.com/p4535992/foundryvtt-mindmap/master/src/module.json`
 4.  Click 'Install' and wait for installation to complete
 5.  Don't forget to enable the module in game using the "Manage Module" button
 
@@ -96,9 +96,9 @@ This module is licensed under [GNU LGPL v3](https://raw.githubusercontent.com/p4
 
 ## [Changelog](./changelog.md)
 
-## Feedback
+## Issues
 
-Any issues, bugs, or feature requests are always welcome to be reported directly to the [Issue Tracker](https://github.com/p4535992/foundryvtt-mindmap/issues )
+Any issues, bugs, or feature requests are always welcome to be reported directly to the [Issue Tracker](https://github.com/p4535992/foundryvtt-mindmap/issues ), or using the [Bug Reporter Module](https://foundryvtt.com/packages/bug-reporter/).
 
 ## Acknowledgements
 

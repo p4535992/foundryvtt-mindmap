@@ -1,5 +1,5 @@
 {
-	"name": "mindmap",
+	"name": "foundryvtt-mindmap",
 	"title": "M.I.N.D.M.A.P. - Moerills Indecision Negator, Decision Maker, And Planner",
 	"description": "Adds a new view to Journal Entries for creating mind map like graphs. In this view you can create a network graph for organizing your relations, flow charts, campaign structures, ideas or whatever you can imagine! Just drag the data from the sidebar to begin planning.",
   "author": "Moerill and p4535992",
@@ -62,6 +62,8 @@
   "minimumCoreVersion": "0.7.6",
   "compatibleCoreVersion": "0.7.9",
   "changelog": "https://raw.githubusercontent.com/p4535992/foundryvtt-mindmap/master/changelog.md",
+  "bugs": "https://github.com/p4535992/foundryvtt-mindmap/issues",
+  "allowBugReporter": true,
   "dependencies": [
     {
       "name": "lib-wrapper"
