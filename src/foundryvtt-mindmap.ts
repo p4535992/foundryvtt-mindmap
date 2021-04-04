@@ -94,32 +94,32 @@ Hooks.once('setup', function () {
   if (!isNewerVersion(moduleVersion, oldVersion))
     return;
 
-  class WelcomeScreen extends Application {
-    static get defaultOptions() {
-      const options = super.defaultOptions;
-      options.template = `modules/${moduleId}/templates/welcome-screen.html`;
-      options.resizable = true;
-      options.width = 450;
-      options.height = 600;
-      options.classes = ["welcome-screen"];
-      options.title = `${title} - Welcome Screen`;
-      return options;
-    }
+  // class WelcomeScreen extends Application {
+  //   static get defaultOptions() {
+  //     const options = super.defaultOptions;
+  //     options.template = `modules/${moduleId}/templates/welcome-screen.html`;
+  //     options.resizable = true;
+  //     options.width = 450;
+  //     options.height = 600;
+  //     options.classes = ["welcome-screen"];
+  //     options.title = `${title} - Welcome Screen`;
+  //     return options;
+  //   }
 
-    activateListeners(html) {
-      super.activateListeners(html);
+  //   activateListeners(html) {
+  //     super.activateListeners(html);
 
-      html.find('.show-again').on('change', ev => {
-        let val = "0.0.0";
-        if (ev.currentTarget.checked)
-          val = moduleVersion;
+  //     html.find('.show-again').on('change', ev => {
+  //       let val = "0.0.0";
+  //       if (ev.currentTarget.checked)
+  //         val = moduleVersion;
 
-        game.settings.set(title, "version", val);
-      })
-    }
-  }
+  //       game.settings.set(title, "version", val);
+  //     })
+  //   }
+  // }
 
-  (new WelcomeScreen()).render(true);
+  // (new WelcomeScreen()).render(true);
 });
 
 /* ------------------------------------ */

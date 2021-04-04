@@ -10,8 +10,29 @@
 [![PayPal](https://img.shields.io/badge/Donate-PayPal-blue?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FYZ294SP2JBGS&source=url)   
 -->
 
+
 This module for [Foundry VTT](https://foundryvtt.com/) adds a third view to each Journal Entry: The MindMap View.  
 In this view you organize you can create a network graph for organizing your relations, flow charts, campaign structures, ideas or whatever you can imagine! Just Drag the data from the sidebar to begin planning.
+
+## NOTE
+
+I found on the project of 'Moerills'
+https://gitlab.com/moerills-fvtt-modules/graphs
+a very promising module but it's seems abbandonded.
+
+I will pay a bounty for see this module revived.
+
+Checkout the bounty:
+
+Here the old bounty [Revive Moerills Graph](https://trello.com/c/udLvgA6V/124-bounty-revive-moerills-graph)
+
+Additional (eventually on separate bounty)
+
+Set a journal specialized for generic graph (default)
+Set a journal specialized for build timeline
+Set a journal specialized for build family tree
+
+
 
 ![Example](./images/graph.jpg)
 ## ~~ READ FIRST ~~

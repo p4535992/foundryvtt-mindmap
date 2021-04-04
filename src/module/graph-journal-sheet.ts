@@ -1,7 +1,7 @@
 import { debug } from '../foundryvtt-mindmap';
 import { Graph } from './graph';
 import { MODULE_NAME } from './settings';
-
+//@ts-ignore
 export class GraphJournalSheet extends JournalSheet {
 	get template() {
 		if (this['_sheetMode'] === "graph") return `/modules/${MODULE_NAME}/templates/graph-journal-sheet.html`;//"/modules/mindmap/templates/graph-journal-sheet.html";
