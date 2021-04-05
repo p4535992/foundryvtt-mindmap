@@ -2,7 +2,7 @@ import { debug, log } from '../foundryvtt-mindmap';
 import { MODULE_NAME } from './settings';
 
 // https://github.com/cytoscape/cytoscape.js
-import cytoscape from './libs/cytoscape.js/cytoscape.esm.js';
+import cytoscape from './libs/cytoscape.js/cytoscape.min.js';
 // import cytoscape from 'cytoscape';
 
 // https://github.com/iVis-at-Bilkent/cytoscape.js-cise
@@ -55,13 +55,19 @@ import spread from './libs/cytoscape.js-spread/cytoscape-spread.js';
 import d3 from './libs/d3/d3.js';
 // import d3 from 'd3';
 
-// let cytoscape;
+let cytoscape;
 
 async function initCytoscape() {
 	// cytoscape = await import(
 	// 	/* webpackPrefetch: true */
 	// 	/* webpackChunkName: "cytoscape" */
 	// 	'cytoscape');
+
+	// cytoscape = window['cy'] = cytoscape({
+	// 	// container: $('#cy')
+	// });
+
+	cytoscape = await import('./libs/cytoscape.js/cytoscape.min.js');
 
 }
 
@@ -72,7 +78,7 @@ async function importExtensions() {
 	// 	/* webpackChunkName: "edgehandles" */
 	// 	'cytoscape-edgehandles')).default;
 
-	// const cxtmenu = (await import(
+	// const contextMenus = (await import(
   	// /* webpackPrefetch: true */
 	// 	/* webpackChunkName: "cxtmenu" */
 	// 	'cytoscape-cxtmenu')).default;
@@ -84,21 +90,35 @@ async function importExtensions() {
 
 	// cytoscape.use(compoundDragAndDrop);
 	// cytoscape.use(edgehandles);
-	// cytoscape.use(cxtmenu);
+	// cytoscape.use(contextMenus);
+	
+	// cytoscape.use( compoundDragAndDrop );
+	// cytoscape.use( edgehandles );
+	// cytoscape.use( contextMenus );
+
+	// let compoundDragAndDropTmp = window['cy'].layout({name: 'compoundDragAndDrop'}).run();
+	// let edgehandlesTmp = window['cy'].layout({name: 'edgehandles'}).run();
+	// let contextMenusTmp = window['cy'].layout({name: 'contextMenus'}).run();
+
+	// cytoscape.use( compoundDragAndDropTmp );
+	// cytoscape.use( edgehandlesTmp );
+	// cytoscape.use( contextMenusTmp );
+
+	// const layouts = (
+	// 	await {
+	// 		compoundDragAndDrop: async () => import('./libs/cytoscape.js-compound-drag-and-drop/cytoscape-compound-drag-and-drop.js'),
+	// 		edgehandles: async () => import('./libs/cytoscape.js-edgehandles/cytoscape-edgehandles.js'),
+	// 		contextMenus: async () => import('./libs/cytoscape.js-context-menus/cytoscape-context-menus.js')
+	// 	}[name]()).default;
+	// cytoscape.use(layouts);
+
+	const edgehandles = (await import('./libs/cytoscape.js-edgehandles/cytoscape-edgehandles.js'));
+	const contextMenus = (await import('./libs/cytoscape.js-context-menus/cytoscape-context-menus.js'));
+	const compoundDragAndDrop = (await import('./libs/cytoscape.js-compound-drag-and-drop/cytoscape-compound-drag-and-drop.js'));
 
 	cytoscape.use( compoundDragAndDrop );
 	cytoscape.use( edgehandles );
 	cytoscape.use( contextMenus );
-
-    // TO ADD ???
-	cytoscape.use( cise );
-	cytoscape.use( cola );
-	cytoscape.use( coseBilkent );
-	cytoscape.use( cxtmenu );
-	cytoscape.use( dagre );
-	cytoscape.use( fcose );
-	cytoscape.use( klay );
-	cytoscape.use( spread );
 
 	extensionsImported = true;
 }
@@ -108,40 +128,82 @@ async function importExtensions() {
  * @param {*} name
  */
 async function loadLayout(name) {
-	const layout = (await {
-			dagre: async () => import(
-				/* webpackPrefetch: true */
-		/* webpackChunkName: "dagre" */
-				'cytoscape-dagre'
-			),
-			klay: async () => import(
-				/* webpackPrefetch: true */
-		/* webpackChunkName: "klay" */
-				'cytoscape-klay'
-			),
-			cola: async () => import(
-				/* webpackPrefetch: true */
-		/* webpackChunkName: "cola" */
-				'cytoscape-cola'
-			),
-			fcose: async () => import(
-				/* webpackPrefetch: true */
-		/* webpackChunkName: "fcose" */
-				'cytoscape-fcose'
-			),
-			cise: async () => import(
-				/* webpackPrefetch: true */
-		/* webpackChunkName: "cise" */
-				'cytoscape-cise'
-			),
-			spread: async () => import(
-				/* webpackPrefetch: true */
-		/* webpackChunkName: "spread" */
-				'cytoscape-spread'
-			),
+	// const layouts = (
+	// 	await {
+	// 		dagre: async () => import(
+	// 			/* webpackPrefetch: true */
+	// 	/* webpackChunkName: "dagre" */
+	// 			'cytoscape-dagre'
+	// 		),
+	// 		klay: async () => import(
+	// 			/* webpackPrefetch: true */
+	// 	/* webpackChunkName: "klay" */
+	// 			'cytoscape-klay'
+	// 		),
+	// 		cola: async () => import(
+	// 			/* webpackPrefetch: true */
+	// 	/* webpackChunkName: "cola" */
+	// 			'cytoscape-cola'
+	// 		),
+	// 		fcose: async () => import(
+	// 			/* webpackPrefetch: true */
+	// 	/* webpackChunkName: "fcose" */
+	// 			'cytoscape-fcose'
+	// 		),
+	// 		cise: async () => import(
+	// 			/* webpackPrefetch: true */
+	// 	/* webpackChunkName: "cise" */
+	// 			'cytoscape-cise'
+	// 		),
+	// 		spread: async () => import(
+	// 			/* webpackPrefetch: true */
+	// 	/* webpackChunkName: "spread" */
+	// 			'cytoscape-spread'
+	// 		),
+	// 	}[name]()).default;
+	// cytoscape.use(layouts);
+
+	// cytoscape.use( cise );
+	// cytoscape.use( cola );
+	// cytoscape.use( coseBilkent );
+	// cytoscape.use( cxtmenu );
+	// cytoscape.use( dagre );
+	// cytoscape.use( fcose );
+	// cytoscape.use( klay );
+	// cytoscape.use( spread );
+
+	// let ciseTmp = window['cy'].layout({name: 'cise'}).run();
+	// let colaTmp = window['cy'].layout({name: 'cola'}).run();
+	// let coseBilkentTmp = window['cy'].layout({name: 'coseBilkent'}).run();
+	// let cxtmenuTmp = window['cy'].layout({name: 'cxtmenu'}).run();
+	// let dagreTmp = window['cy'].layout({name: 'dagre'}).run();
+	// let fcoseTmp = window['cy'].layout({name: 'fcose'}).run();
+	// let klayTmp = window['cy'].layout({name: 'klay'}).run();
+	// let spreadTmp = window['cy'].layout({name: 'spread'}).run();
+
+	// cytoscape.use( ciseTmp );
+	// cytoscape.use( colaTmp );
+	// cytoscape.use( coseBilkentTmp );
+	// cytoscape.use( cxtmenuTmp );
+	// cytoscape.use( dagreTmp );
+	// cytoscape.use( fcoseTmp );
+	// cytoscape.use( klayTmp );
+	// cytoscape.use( spreadTmp );
+
+	const layouts = (
+		await {
+			dagre: async () => import('./libs/cytoscape.js-dagre/cytoscape-dagre.js'),
+			klay: async () => import('./libs/cytoscape.js-klay/cytoscape-klay.js'),
+			cola: async () => import('./libs/cytoscape.js-cola/cytoscape-cola.js'),
+			fcose: async () => import('./libs/cytoscape.js-fcose/cytoscape-fcose.js'),
+			cise: async () => import('./libs/cytoscape.js-cise/cytoscape-cise.js'),
+			spread: async () => import('./libs/cytoscape.js-spread/cytoscape-spread.js'),
+			cxtmenu: async () => import('./libs/cytoscape.js-cxtmenu/cytoscape-cxtmenu.js'),
+			coseBilkent: async () => import('./libs/cytoscape.js-cose-bilkent/cytoscape-cose-bilkent.js'),
 		}[name]()).default;
 
-	cytoscape.use(layout);
+	cytoscape.use(layouts);
+
 }
 
 const dblClickTime = 300;
@@ -160,10 +222,10 @@ export class Graph {
 	async init() {
 		if (!cytoscape){
 			await initCytoscape();
-    }
+    	}
 		if (!extensionsImported){
 			await importExtensions();
-    }
+   		}
 		const journal = this['_journal'];
 		const container = this['_container'];
 		let json = journal.getFlag(MODULE_NAME, 'data') || {elements: {}};
@@ -245,7 +307,7 @@ export class Graph {
 		let ret = [];
 
 		const modifyLabel = { // modify label
-						fillColor: 'rgba(50, 50, 50, 0.75)',
+						fillColor: 'RGBA(50, 50, 50, 0.75)',
 						content: '<i class="fas fa-tag"></i><br>Modify label',
 						contentStyle: {},
 						select: (ele) => this._modifyData(ele, 'name', 'text'),
@@ -254,13 +316,13 @@ export class Graph {
 
 		let node = [
 			{ // delete
-				fillColor: 'rgba(200, 50, 50, 0.75)',
+				fillColor: 'RGBA(200, 50, 50, 0.75)',
 				content: '<i class="fa fa-trash" aria-hidden="true"></i><br>Remove<br>Node',
 				select: (ele) => this.removeElement(ele),
 				enabled: true
 			},
 			{ // mark visited
-				fillColor: 'rgba(50, 50, 50, 0.75)',
+				fillColor: 'RGBA(50, 50, 50, 0.75)',
 				content: 'Toggle visited',
 				select: (ele) => {
 					ele.toggleClass('visited');
@@ -269,7 +331,7 @@ export class Graph {
 				enabled: true
 			},
 			{ // add edge
-				fillColor: 'rgba(50, 50, 50, 0.75)',
+				fillColor: 'RGBA(50, 50, 50, 0.75)',
 				content: 'Add<br>Edge',
 				select: (ele) => {
 					this['_eh'].enable();
@@ -278,7 +340,7 @@ export class Graph {
 				enabled: true
 			},
 			{ // Add text node
-				fillColor: 'rgba(50, 50, 50, 0.75)',
+				fillColor: 'RGBA(50, 50, 50, 0.75)',
 				content: 'Add<br>Textnode',
 				select: async (ele) => {
 					const node = await this.addNode(null, ele.renderedPosition());
@@ -292,7 +354,7 @@ export class Graph {
 				...node
 				, ...[
 					{ // show entity
-						fillColor: 'rgba(50, 50, 50, 0.75)',
+						fillColor: 'RGBA(50, 50, 50, 0.75)',
 						content: '<i class="fas fa-eye"></i><br>Open Sheet',
 						select: (ele) => this._showEntity(ele.data().uuid),
 						enabled: true
@@ -306,7 +368,7 @@ export class Graph {
 				...node,
 				...[
 					{ // Activate Scene
-						fillColor: 'rgba(50, 50, 50, 0.75)',
+						fillColor: 'RGBA(50, 50, 50, 0.75)',
 						content: '<i class="fas fa-bullseye fa-fw"></i><br>Activate',
 						select: async (ele) => {
 							const entity = await fromUuid(ele.data().uuid);
@@ -366,13 +428,13 @@ export class Graph {
 			selector: 'edge',
 			commands: [
 				{ // delete
-					fillColor: 'rgba(200, 50, 50, 0.75)',
+					fillColor: 'RGBA(200, 50, 50, 0.75)',
 					content: '<i class="fa fa-trash" aria-hidden="true"></i><br>Remove<br>Edge',
 					select: (ele) => this.removeElement(ele),
 					enabled: true
 				},
 				{ // Toggle direction
-					fillColor: 'rgba(50, 50, 50, 0.75)',
+					fillColor: 'RGBA(50, 50, 50, 0.75)',
 					content: '<i class="fas fa-map-signs"></i><br>Toggle direction',
 					contentStyle: {},
 					select: (ele) => this._toggleEdgeDirection(ele),
@@ -380,7 +442,7 @@ export class Graph {
 				},
 				modifyLabel,
 				{ // modify color
-					fillColor: 'rgba(50, 50, 50, 0.75)',
+					fillColor: 'RGBA(50, 50, 50, 0.75)',
 					content: '<i class="fas fa-palette"></i><br>Change Color',
 					contentStyle: {},
 					select: (ele) => this._modifyData(ele, 'color', 'color'),

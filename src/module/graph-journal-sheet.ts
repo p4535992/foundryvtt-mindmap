@@ -14,6 +14,10 @@ export class GraphJournalSheet extends JournalSheet {
 	// 	return 'JournalSheet';
 	// }
 
+	get journal(){
+		return this.object;
+	}
+
 	get name() {
 		return 'GraphJournalSheet';
 	}
@@ -22,12 +26,83 @@ export class GraphJournalSheet extends JournalSheet {
 		return 'GraphJournalSheet';
 	}
 
+	static get defaultOptions() {
+		const options = super.defaultOptions;
+		options.baseApplication = "JournalSheet";
+		//options.classes.push('custom-journal');
+		return options;
+	}
+
+	//Include the option for the Drop Cap style in the editor styles' menu
+	//For compatibility with 6.6, to be removed when 7.x hits stable, 
+	//replaced with activateEditor
+	_createEditor(target, editorOptions, initialContent) {	
+		editorOptions.style_formats.push(
+			{
+				title: 'GraphJournalSheet Selection',
+				items: [
+					{
+						title: 'GraphJournalSheet',
+						inline: 'span',
+						classes: 'drop-cap',
+						wrapper: false
+					}
+				]
+			}
+		);
+		//@ts-ignore
+		super._createEditor(target, editorOptions, initialContent);
+	}
+
+	//Include the option for the Drop Cap style in the editor styles' menu
+	activateEditor(name, options:any={}, ...args) {
+		options.style_formats.push(
+			{
+				title: 'GraphJournalSheet Selection',
+				items: [
+					{
+						title: 'GraphJournalSheet',
+						inline: 'span',
+						classes: 'drop-cap',
+						wrapper: false
+					// },
+					// {
+					// 	title: game.i18n.localize("custom-journal.SimpleBlock"),
+					// 	block: 'section',
+					// 	classes: 'simple-block',
+					// 	wrapper: true
+					// },
+					// {
+					// 	title: game.i18n.localize("custom-journal.SimpleBlockFloat"),
+					// 	block: 'section',
+					// 	classes: 'simple-block-float',
+					// 	wrapper: true
+					// },
+					// {
+					// 	title: game.i18n.localize("custom-journal.RidgedBlock"),
+					// 	block: 'section',
+					// 	classes: 'ridged-block',
+					// 	wrapper: true
+					// },
+					// {
+					// 	title: game.i18n.localize("custom-journal.RidgedBlockFloat"),
+					// 	block: 'section',
+					// 	classes: 'ridged-block-float',
+					// 	wrapper: true
+					}
+				]
+			}
+		);
+		//@ts-ignore
+		super.activateEditor(name, options, ...args);
+	}
+
 	/**
 	 * @override
 	 */
 	_getHeaderButtons() {
 
-    const isOwner = this.object.owner,
+    	const isOwner = this.object.owner,
 				atLeastLimited = this.object.hasPerm(game.user, "LIMITED"),
 				hasMindMap = !!this.object.getFlag(MODULE_NAME, 'data'),
 				hasMultipleModes = this.object.data['img'] && this.object.data['content'];
@@ -74,8 +149,8 @@ export class GraphJournalSheet extends JournalSheet {
 		const hasMindmapElements = !!this.object.getFlag(MODULE_NAME, 'data.elements');
 
 		const otherwise = this.object.limited ? null : this.object.data['content'] ? "text" : hasMindmapElements ? "graph" : "text";
-    return hasImage ? "image" : otherwise;
-  }
+		return hasImage ? "image" : otherwise;
+	}
 
 
 	activateListeners(html) {
@@ -173,21 +248,21 @@ export class GraphJournalSheet extends JournalSheet {
 	}
 
 	_injectHTML(html, options) {
-    $('body').append(html);
-    this._element = html;
-    html.hide().fadeIn(200, ev => {
+		$('body').append(html);
+		this._element = html;
+		html.hide().fadeIn(200, ev => {
 			if (this['_graph']){
 				this['_graph'].init()
-      }
+			}
 		});
 	}
 
 	setPosition(...args) {
-    const [left, top, width, height, scale] = args;
-		const ret = super.setPosition({left, top, width, height, scale});
-		if (this['_graph']){
-			this['_graph'].update();
-    }
+		const [left, top, width, height, scale] = args;
+			const ret = super.setPosition({left, top, width, height, scale});
+			if (this['_graph']){
+				this['_graph'].update();
+		}
 		return ret;
 	}
 }
