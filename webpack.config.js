@@ -11,7 +11,7 @@ module.exports = {
     publicPath: 'modules/foundryvtt-mindmap/',
     filename: 'foundryvtt-mindmap.js',
     chunkFilename: 'bundles/[name].bundle.js',
-    path: path.resolve(__dirname, 'dist2'),
+    path: path.resolve(__dirname, 'dist'),
   },
   optimization: {
     minimize: true

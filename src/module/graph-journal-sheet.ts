@@ -18,20 +18,20 @@ export class GraphJournalSheet extends JournalSheet {
 		return this.object;
 	}
 
-	get name() {
-		return 'GraphJournalSheet';
-	}
+	// get name() {
+	// 	return 'GraphJournalSheet';
+	// }
 
 	get title() {
 		return 'GraphJournalSheet';
 	}
 
-	static get defaultOptions() {
-		const options = super.defaultOptions;
-		options.baseApplication = "JournalSheet";
-		//options.classes.push('custom-journal');
-		return options;
-	}
+	// static get defaultOptions() {
+	// 	const options = super.defaultOptions;
+	// 	options.baseApplication = "JournalSheet";
+	// 	//options.classes.push('custom-journal');
+	// 	return options;
+	// }
 
 	//Include the option for the Drop Cap style in the editor styles' menu
 	//For compatibility with 6.6, to be removed when 7.x hits stable, 
@@ -64,31 +64,7 @@ export class GraphJournalSheet extends JournalSheet {
 						title: 'GraphJournalSheet',
 						inline: 'span',
 						classes: 'drop-cap',
-						wrapper: false
-					// },
-					// {
-					// 	title: game.i18n.localize("custom-journal.SimpleBlock"),
-					// 	block: 'section',
-					// 	classes: 'simple-block',
-					// 	wrapper: true
-					// },
-					// {
-					// 	title: game.i18n.localize("custom-journal.SimpleBlockFloat"),
-					// 	block: 'section',
-					// 	classes: 'simple-block-float',
-					// 	wrapper: true
-					// },
-					// {
-					// 	title: game.i18n.localize("custom-journal.RidgedBlock"),
-					// 	block: 'section',
-					// 	classes: 'ridged-block',
-					// 	wrapper: true
-					// },
-					// {
-					// 	title: game.i18n.localize("custom-journal.RidgedBlockFloat"),
-					// 	block: 'section',
-					// 	classes: 'ridged-block-float',
-					// 	wrapper: true
+						wrapper: false					
 					}
 				]
 			}
