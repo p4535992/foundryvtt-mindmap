@@ -78,8 +78,9 @@ This module uses the [libWrapper](https://github.com/ruipin/fvtt-lib-wrapper) li
 
 ### [cytoscape-fcose](https://github.com/iVis-at-Bilkent/cytoscape.js-fcose) (2.0.0)
 
-"cytoscape-klay": "^3.1.4",
-"cytoscape-spread": "^3.0.0",
+### [cytoscape-klay](https://github.com/cytoscape/cytoscape.js-klay) (3.1.4)
+
+### [cytoscape-spread](https://github.com/cytoscape/cytoscape.js-spread) (3.0.0)
 
 ### Creating your first graph
 Start up FVTT, connect to a world, choosee a Journal Entry and click on *MindMap* in the titlebar. Now you will see a canvas filling the journal, just drag Entities from the sidbar onto it. If you drag an entity onto an already existing Node it will automatically create a directed edge from the existing node to the newly created one.  
