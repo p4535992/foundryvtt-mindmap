@@ -74,25 +74,25 @@ Hooks.once('setup', function () {
   // fromUuid('JournalEntry.uRAS8eO7VOolui9w').then(journal => journal.show("graph", true))
 
 	// Only show welcome screen to gms
-	if (!game.user.isGM){
-    return;
-  }
+	// if (!game.user.isGM){
+  //   return;
+  // }
 
   // Edit next line to match module.
-  const module = game.modules.get(MODULE_NAME);
-  const moduleId = module.id;
-  const title = module.data.title;
-  const moduleVersion = module.data.version;
-  game.settings.register(title, 'version', {
-    name: `${title} Version`,
-    default: "0.0.0",
-    type: String,
-    scope: 'world',
-  });
-  const oldVersion = game.settings.get(title, "version");
+  // const module = game.modules.get(MODULE_NAME);
+  // const moduleId = module.id;
+  // const title = module.data.title;
+  // const moduleVersion = module.data.version;
+  // game.settings.register(title, 'version', {
+  //   name: `${title} Version`,
+  //   default: "0.0.0",
+  //   type: String,
+  //   scope: 'world',
+  // });
+  // const oldVersion = game.settings.get(title, "version");
 
-  if (!isNewerVersion(moduleVersion, oldVersion))
-    return;
+  // if (!isNewerVersion(moduleVersion, oldVersion))
+  //   return;
 
   // class WelcomeScreen extends Application {
   //   static get defaultOptions() {

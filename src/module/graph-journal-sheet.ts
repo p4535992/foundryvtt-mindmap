@@ -13,6 +13,14 @@ export class GraphJournalSheet extends JournalSheet {
 	// 	return 'JournalSheet';
 	// }
 
+	get name() {
+		return 'GraphJournalSheet';
+	}
+
+	get title() {
+		return 'GraphJournalSheet';
+	}
+
 	/**
 	 * @override
 	 */
@@ -158,10 +166,10 @@ export class GraphJournalSheet extends JournalSheet {
     }
 		return super.render(force, options);
 	}
-	// async _render(...args) {
-	// 	await super._render(...args);
+	async _render(...args) {
+		await super._render(...args);
 
-	// }
+	}
 
 	_injectHTML(html, options) {
     $('body').append(html);
