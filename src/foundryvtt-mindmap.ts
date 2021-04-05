@@ -11,7 +11,7 @@
  */
 // Import JavaScript modules
 import {libWrapper} from './module/libs/shim.js';
-import { Graph } from './module/libs/graph.js';
+import { Graph } from './module/graph.js';
 // Import TypeScript modules
 import { registerSettings } from './module/settings';
 import { preloadTemplates } from './module/preloadTemplates';
@@ -128,11 +128,11 @@ Hooks.once('setup', function () {
 /* When ready							*/
 /* ------------------------------------ */
 Hooks.once('ready', function () {
-	// // Do anything once the module is ready
-	// if (!game.modules.get("lib-wrapper")?.active && game.user.isGM){
-  //  	ui.notifications.error("The " + MODULE_NAME + " module requires to install and activate the 'libWrapper' module.");
-	// 	return;
-	// }
+	// Do anything once the module is ready
+	if (!game.modules.get("lib-wrapper")?.active && game.user.isGM){
+   	ui.notifications.error("The " + MODULE_NAME + " module requires to install and activate the 'libWrapper' module.");
+		return;
+	}
 
 	readyHooks();
 });

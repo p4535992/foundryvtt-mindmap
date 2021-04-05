@@ -9,9 +9,9 @@ module.exports = {
   devtool: 'source-map',
   output: {
     publicPath: 'modules/foundryvtt-mindmap/',
-    filename: 'foundryvtt-mindmap',
+    filename: 'foundryvtt-mindmap.js',
     chunkFilename: 'bundles/[name].bundle.js',
-    path: path.resolve(__dirname, ''),
+    path: path.resolve(__dirname, 'dist2'),
   },
   optimization: {
     minimize: true
