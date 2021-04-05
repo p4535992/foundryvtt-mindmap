@@ -1,4 +1,5 @@
 import { debug } from '../foundryvtt-mindmap';
+
 import { Graph } from './graph';
 import { MODULE_NAME } from './settings';
 //@ts-ignore

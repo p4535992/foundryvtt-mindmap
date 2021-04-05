@@ -10,15 +10,17 @@
  * 					 determines how others may use and modify your module
  */
 // Import JavaScript modules
-import {libWrapper} from './module/libs/shim.js'
+import {libWrapper} from './module/libs/shim.js';
+import { Graph } from './module/libs/graph.js';
 // Import TypeScript modules
 import { registerSettings } from './module/settings';
 import { preloadTemplates } from './module/preloadTemplates';
 import { MODULE_NAME } from './module/settings';
 import { initHooks, readyHooks } from './module/Hooks';
 import { installedModules, setupModules } from './module/setupModules';
-import { Graph } from './module/graph.js';
+
 import { GraphJournalSheet } from './module/graph-journal-sheet';
+
 
 export let debugEnabled = 0;
 // 0 = none, warnings = 1, debug = 2, all = 3
@@ -125,12 +127,12 @@ Hooks.once('setup', function () {
 /* ------------------------------------ */
 /* When ready							*/
 /* ------------------------------------ */
-Hooks.once('ready', () => {
-	// Do anything once the module is ready
-	if (!game.modules.get("lib-wrapper")?.active && game.user.isGM){
-   	ui.notifications.error(`The '${MODULE_NAME}' module requires to install and activate the 'libWrapper' module.`);
-		return;
-	}
+Hooks.once('ready', function () {
+	// // Do anything once the module is ready
+	// if (!game.modules.get("lib-wrapper")?.active && game.user.isGM){
+  //  	ui.notifications.error("The " + MODULE_NAME + " module requires to install and activate the 'libWrapper' module.");
+	// 	return;
+	// }
 
 	readyHooks();
 });

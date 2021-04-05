@@ -47,14 +47,14 @@
     }
   ],
   "scripts": [
-    "./module/libs/shim.js",
-    "./module/libs/graph.js"
+    "./module/libs/shim.js"
   ],
   "esmodules": [
     "foundryvtt-mindmap.js"
   ],
   "styles": [
-    "styles/graphs.css"
+    "styles/graphs.css",
+    "module/libs/cytoscape-context-menus.js/cytoscape-context-menus.css"
   ],
   "url": "https://github.com/p4535992/foundryvtt-mindmap",
   "manifest": "https://raw.githubusercontent.com/p4535992/foundryvtt-mindmap/master/src/module.json",

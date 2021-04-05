@@ -58,11 +58,35 @@ To install this module manually:
 
 This module uses the [libWrapper](https://github.com/ruipin/fvtt-lib-wrapper) library for wrapping core methods. It is a hard dependency and it is recommended for the best experience and compatibility with other modules.
 
+### [Cytoscape]() (3.18.1)
+
+### [Cytoscape Cise](https://github.com/iVis-at-Bilkent/cytoscape.js-cise) (1.0.0)
+
+### [Cytoscape Cola](https://github.com/cytoscape/cytoscape.js-cola) (2.4.0)
+
+### [Cytoscape context menus](https://github.com/iVis-at-Bilkent/cytoscape.js-context-menus) (4.0.0)
+
+### [cytoscape-compound-drag-and-drop](https://github.com/cytoscape/cytoscape.js-compound-drag-and-drop) (1.0.0)
+
+### [cytoscape-cose-bilkent](https://github.com/cytoscape/cytoscape.js-cose-bilkent) (4.1.0)
+
+### [cytoscape-cxtmenu](https://github.com/cytoscape/cytoscape.js-cxtmenu) (3.4.0)
+
+### [cytoscape-dagre](https://github.com/cytoscape/cytoscape.js-dagre) (2.3.2)
+
+### [cytoscape-edgehandles](https://github.com/cytoscape/cytoscape.js-edgehandles) (3.6.0)
+
+### [cytoscape-fcose](https://github.com/iVis-at-Bilkent/cytoscape.js-fcose) (2.0.0)
+
+"cytoscape-klay": "^3.1.4",
+"cytoscape-spread": "^3.0.0",
+
 ### Creating your first graph
 Start up FVTT, connect to a world, choosee a Journal Entry and click on *MindMap* in the titlebar. Now you will see a canvas filling the journal, just drag Entities from the sidbar onto it. If you drag an entity onto an already existing Node it will automatically create a directed edge from the existing node to the newly created one.  
 ![Usage](./images/first_steps.gif)
 
 ## Advanced
+
 ### View the nodes sheet
 You can double click a node to view its sheet.
 

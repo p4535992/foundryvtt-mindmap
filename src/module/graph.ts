@@ -1,35 +1,92 @@
 import { debug, log } from '../foundryvtt-mindmap';
 import { MODULE_NAME } from './settings';
 
-let cytoscape;
+// 
+// import cytoscape from './libs/cytoscape.js/cytoscape.esm.js';
+import cytoscape from 'cytoscape';
+
+// https://github.com/iVis-at-Bilkent/cytoscape.js-cise
+// import cise from './libs/cytoscape.js-cise/cytoscape-cise.js';
+import cise from 'cytoscape-cise';
+
+// https://github.com/cytoscape/cytoscape.js-cola
+// import cola from './libs/cytoscape.js-cola/cytoscape-cola.js';
+import cola from 'cytoscape-cola';
+
+// https://github.com/iVis-at-Bilkent/cytoscape.js-context-menus
+// import contextMenus from './libs/cytoscape.js-context-menus/cytoscape-context-menus.js';
+import contextMenus from 'cytoscape-context-menus';
+// import CSS as well
+// import 'cytoscape-context-menus/cytoscape-context-menus.css';
+
+// https://github.com/cytoscape/cytoscape.js-compound-drag-and-drop
+// import compoundDragAndDrop from './libs/cytoscape.js-compound-drag-and-drop/cytoscape-compound-drag-and-drop.js';
+import compoundDragAndDrop from 'cytoscape-compound-drag-and-drop';
+
+// https://github.com/cytoscape/cytoscape.js-cose-bilkent
+// import coseBilkent from './libs/cytoscape.js-cose-bilkent/cytoscape-cose-bilkent.js';
+import coseBilkent from 'cytoscape-cose-bilkent';
+
+// https://github.com/cytoscape/cytoscape.js-cxtmenu
+//import cxtmenu from './libs/cytoscape.js-cxtmenu/cytoscape-cxtmenu.js';
+import cxtmenu from 'cytoscape-cxtmenu';
+
+// https://github.com/cytoscape/cytoscape.js-dagre
+// import dagre from './libs/cytoscape.js-dagre/cytoscape-dagre.js';
+import dagre from 'cytoscape-dagre';
+
+// https://github.com/cytoscape/cytoscape.js-edgehandles
+// import edgehandles from './libs/cytoscape.js-edgehandles/cytoscape-edgehandles.js';
+import edgehandles from 'cytoscape-edgehandles';
+
+// https://github.com/iVis-at-Bilkent/cytoscape.js-fcose
+
+import fcose from 'cytoscape-fcose';
+
+// let cytoscape;
 
 async function initCytoscape() {
-	cytoscape = await import(
-		/* webpackPrefetch: true */
-		/* webpackChunkName: "cytoscape" */
-		'cytoscape');
+	// cytoscape = await import(
+	// 	/* webpackPrefetch: true */
+	// 	/* webpackChunkName: "cytoscape" */
+	// 	'cytoscape');
 
 }
 
 let extensionsImported = false;
 async function importExtensions() {
-	const edgehandles = (await import(
-  	/* webpackPrefetch: true */
-		/* webpackChunkName: "edgehandles" */
-		'cytoscape-edgehandles')).default;
-	const cxtmenu = (await import(
-  	/* webpackPrefetch: true */
-		/* webpackChunkName: "cxtmenu" */
-		'cytoscape-cxtmenu')).default;
+	// const edgehandles = (await import(
+  	// /* webpackPrefetch: true */
+	// 	/* webpackChunkName: "edgehandles" */
+	// 	'cytoscape-edgehandles')).default;
 
-	const compoundDragAndDrop = (await import(
-		/* webpackPrefetch: true */
-		/* webpackChunkName: "compound-drag-and-drop" */
-		'cytoscape-compound-drag-and-drop')).default;
+	// const cxtmenu = (await import(
+  	// /* webpackPrefetch: true */
+	// 	/* webpackChunkName: "cxtmenu" */
+	// 	'cytoscape-cxtmenu')).default;
 
-	cytoscape.use(compoundDragAndDrop);
-	cytoscape.use(edgehandles);
-	cytoscape.use(cxtmenu);
+	// const compoundDragAndDrop = (await import(
+	// 	/* webpackPrefetch: true */
+	// 	/* webpackChunkName: "compound-drag-and-drop" */
+	// 	'cytoscape-compound-drag-and-drop')).default;
+
+	// cytoscape.use(compoundDragAndDrop);
+	// cytoscape.use(edgehandles);
+	// cytoscape.use(cxtmenu);
+
+	cytoscape.use( compoundDragAndDrop );
+	cytoscape.use( edgehandles );
+	cytoscape.use( contextMenus );
+
+    // TO ADD ???
+	cytoscape.use( cise );
+	cytoscape.use( cola );
+	cytoscape.use( coseBilkent );
+	cytoscape.use( cxtmenu );
+	cytoscape.use( dagre );
+	cytoscape.use( fcose );
+
+	
 	extensionsImported = true;
 }
 
