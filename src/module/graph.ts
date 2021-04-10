@@ -330,6 +330,7 @@ export class Graph {
 						content: '<i class="fas fa-bullseye fa-fw"></i><br>Activate',
 						select: async (ele) => {
 							const entity = await fromUuid(ele.data().uuid);
+							//@ts-ignore
 							entity.activate();
 						},
 						enabled: true
@@ -826,13 +827,14 @@ export class Graph {
 	 * @param {string} uuid
 	 */
 	async _showEntity(uuid) {
-		let entity = await fromUuid(uuid);
-
-		if (!entity.entity) // owned item
+		let entity:any = await fromUuid(uuid);
+		// owned item
+		if (!entity.entity){ 
 			entity = new CONFIG.Item.entityClass(entity,null);
-
-		if (entity.permission > CONST.ENTITY_PERMISSIONS.NONE)
+		}
+		if (entity.permission > CONST.ENTITY_PERMISSIONS.NONE){
 			entity.sheet.render(true);
+		}
 	}
 
 	/**

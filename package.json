@@ -9,11 +9,12 @@
 		"build:watch": "gulp watch",
 		"clean": "gulp clean && gulp copy --clean",
 		"watch": "webpack --watch",
-		"update": "npm install --save-dev gitlab:foundry-projects/foundry-pc/foundry-pc-types"
+		"update": "npm install --save-dev @league-of-foundry-developers/foundry-vtt-types@fvtt-0.7.9"
 	},
 	"author": "",
 	"license": "",
 	"devDependencies": {
+		"@league-of-foundry-developers/foundry-vtt-types": "^0.7.9-6",
 		"@types/cytoscape": "^3.14.12",
 		"archiver": "^5.2.0",
 		"chalk": "^4.1.0",
@@ -31,8 +32,7 @@
 		"cytoscape-spread": "^3.0.0",
 		"d3": "^6.6.2",
 		"drawio": "^1.0.7",
-		"foundry-pc-types": "gitlab:foundry-projects/foundry-pc/foundry-pc-types",
-		"fs-extra": "^9.0.1",
+		"fs-extra": "^9.1.0",
 		"gulp": "^4.0.2",
 		"gulp-git": "^2.10.1",
 		"gulp-less": "^4.0.1",
@@ -40,12 +40,18 @@
 		"gulp-typescript": "^6.0.0-alpha.1",
 		"json-stringify-pretty-compact": "^2.0.0",
 		"sass": "^1.26.10",
-		"typescript": "^3.9.7",
+		"typescript": "^4.2.4",
 		"webpack": "^4.46.0",
 		"webpack-cli": "^3.3.12",
 		"yargs": "^15.4.1"
 	},
 	"dependencies": {
+		"eslint": "^7.14.0",
+		"eslint-config-airbnb": "^18.2.1",
+		"eslint-plugin-import": "^2.22.1",
+		"eslint-plugin-jsx-a11y": "^6.4.1",
+		"eslint-plugin-react": "^7.21.5",
+		"eslint-plugin-react-hooks": "^4.2.0",
 		"lodash.debounce": "^4.0.8"
 	}
 }

@@ -17,7 +17,6 @@ import { registerSettings } from './module/settings';
 import { preloadTemplates } from './module/preloadTemplates';
 import { MODULE_NAME } from './module/settings';
 import { initHooks, readyHooks } from './module/Hooks';
-import { installedModules, setupModules } from './module/setupModules';
 
 import { GraphJournalSheet } from './module/graph-journal-sheet';
 

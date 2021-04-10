@@ -4,9 +4,11 @@ import { Graph } from './graph';
 import { MODULE_NAME } from './settings';
 //@ts-ignore
 export class GraphJournalSheet extends JournalSheet {
-	get template() {
-		if (this['_sheetMode'] === "graph") return `/modules/${MODULE_NAME}/templates/graph-journal-sheet.html`;//"/modules/mindmap/templates/graph-journal-sheet.html";
 
+	get template() {
+		if (this._sheetMode.toString() === "graph"){
+			return `/modules/${MODULE_NAME}/templates/graph-journal-sheet.html`;//"/modules/mindmap/templates/graph-journal-sheet.html";
+		}
 		return super.template;
 	}
 
@@ -36,6 +38,7 @@ export class GraphJournalSheet extends JournalSheet {
 	//Include the option for the Drop Cap style in the editor styles' menu
 	//For compatibility with 6.6, to be removed when 7.x hits stable, 
 	//replaced with activateEditor
+	/*
 	_createEditor(target, editorOptions, initialContent) {	
 		editorOptions.style_formats.push(
 			{
@@ -53,7 +56,7 @@ export class GraphJournalSheet extends JournalSheet {
 		//@ts-ignore
 		super._createEditor(target, editorOptions, initialContent);
 	}
-
+	*/
 	//Include the option for the Drop Cap style in the editor styles' menu
 	activateEditor(name, options:any={}, ...args) {
 		options.style_formats.push(
@@ -88,10 +91,10 @@ export class GraphJournalSheet extends JournalSheet {
 		if (hasMindMap && !hasMultipleModes){
 			if (!this.object.data['img']){
 				this.object.data['img'] = placeholder;
-      }else{
+      		}else{
 				this.object.data['content'] = placeholder;
-      }
-    }
+      		}
+    	}
 		let buttons = super._getHeaderButtons();
 
 		if (isOwner || (atLeastLimited && hasMindMap) ) {
@@ -99,7 +102,8 @@ export class GraphJournalSheet extends JournalSheet {
 				label: "MindMap",
 				class: "entry-graph",
 				icon: "fas fa-project-diagram",
-				onclick: ev => this['_onSwapMode'](ev, "graph")
+				//@ts-ignore
+				onclick: (ev:any) => this._onSwapMode(ev, "graph")
 			});
 		}
 
@@ -119,7 +123,7 @@ export class GraphJournalSheet extends JournalSheet {
 
 		return buttons;
 	}
-
+	//@ts-ignore
 	_inferDefaultMode() {
 		const hasImage = !!this.object.data['img'];
 		const hasMindmapElements = !!this.object.getFlag(MODULE_NAME, 'data.elements');
@@ -131,13 +135,13 @@ export class GraphJournalSheet extends JournalSheet {
 
 	activateListeners(html) {
 		super.activateListeners(html);
-		if (this['_sheetMode'] !== "graph"){
+		if (this._sheetMode.toString() !== "graph"){
 			return;
-    }
+    	}
 		const graphContainer = html[0].querySelector('.graph');
 		if (this['_graph']){
 			this['_graph'].destroy();
-    }
+   		}
 		this['_graph'] = new Graph(graphContainer, this.object);
 
 		const settings = html[0].querySelector('.graph-settings-menu');
@@ -206,7 +210,7 @@ export class GraphJournalSheet extends JournalSheet {
 	 */
 	render(force = false, options= {}) {
 		debug('rendering sheet', options);
-		if (this.rendered && (!options['sheetMode'] || options['sheetMode'] === "graph") && this['_sheetMode'] === "graph")	{
+		if (this.rendered && (!options['sheetMode'] || options['sheetMode'] === "graph") && this._sheetMode.toString() === "graph")	{
 			const udata = getProperty(options, "data.flags."+MODULE_NAME+".data");
 			if (udata){
 				this['_graph'].update(udata);
