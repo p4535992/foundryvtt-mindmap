@@ -1,6 +1,6 @@
+![](https://img.shields.io/badge/Foundry-v0.7.9-informational)
+
 # **MINDMAP** - Moerills Indecision Negator, Decision Maker, And Planner
-
-
 
 ## This is currently a BETA release!
 
