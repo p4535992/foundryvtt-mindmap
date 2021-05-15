@@ -47,7 +47,7 @@
     }
   ],
   "scripts": [
-    "./module/libs/shim.js"
+
   ],
   "esmodules": [
     "foundryvtt-mindmap.js"

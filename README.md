@@ -20,11 +20,8 @@ I found on the project of 'Moerills'
 https://gitlab.com/moerills-fvtt-modules/graphs
 a very promising module but it's seems abbandonded.
 
-I will pay a bounty for see this module revived.
 
-Checkout the bounty:
-
-Here the old bounty [Revive Moerills Graph](https://trello.com/c/udLvgA6V/124-bounty-revive-moerills-graph)
+### [Checkout the bountyon trello](https://trello.com/c/gw9c7HKH/273-revive-mindmap-journal-graph-support)
 
 Additional (eventually on separate bounty)
 
