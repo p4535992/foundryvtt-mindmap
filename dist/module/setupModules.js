@@ -1,11 +1,8 @@
-import { debug, error, debugEnabled } from "../foundryvtt-mindmap";
-import { log } from "../foundryvtt-mindmap";
-import { MODULE_NAME } from './settings';
+export {};
 // let modules = {
 //               "lib-wrapper": "0.0.0",
 //             };
 // export let installedModules = new Map();
-
 // export let setupModules = () => {
 //   for (let name of Object.keys(modules)) {
 //     const modVer = game.modules.get(name)?.data.version || "0.0.0";

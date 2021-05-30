@@ -16,9 +16,9 @@ In this view you organize you can create a network graph for organizing your rel
 
 ## NOTE
 
-I found on the project of 'Moerills'
-https://gitlab.com/moerills-fvtt-modules/graphs
-a very promising module but it's seems abbandonded.
+I found on the project of 'Moerills' https://gitlab.com/moerills-fvtt-modules/graphs a very promising module but it's seems abbandonded.
+
+If you are not a "Typescript developer" you can use the dist folder for cotnribute with "javascript",
 
 
 ### [Checkout the bountyon trello](https://trello.com/c/gw9c7HKH/273-revive-mindmap-journal-graph-support)
@@ -28,7 +28,6 @@ Additional (eventually on separate bounty)
 Set a journal specialized for generic graph (default)
 Set a journal specialized for build timeline
 Set a journal specialized for build family tree
-
 
 
 ![Example](./images/graph.jpg)

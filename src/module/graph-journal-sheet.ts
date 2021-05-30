@@ -20,43 +20,21 @@ export class GraphJournalSheet extends JournalSheet {
 		return this.object;
 	}
 
-	// get name() {
-	// 	return 'GraphJournalSheet';
-	// }
+	get name() {
+		return 'GraphJournalSheet';
+	}
 
 	get title() {
 		return 'GraphJournalSheet';
 	}
 
-	// static get defaultOptions() {
-	// 	const options = super.defaultOptions;
-	// 	options.baseApplication = "JournalSheet";
-	// 	//options.classes.push('custom-journal');
-	// 	return options;
-	// }
-
-	//Include the option for the Drop Cap style in the editor styles' menu
-	//For compatibility with 6.6, to be removed when 7.x hits stable, 
-	//replaced with activateEditor
-	/*
-	_createEditor(target, editorOptions, initialContent) {	
-		editorOptions.style_formats.push(
-			{
-				title: 'GraphJournalSheet Selection',
-				items: [
-					{
-						title: 'GraphJournalSheet',
-						inline: 'span',
-						classes: 'drop-cap',
-						wrapper: false
-					}
-				]
-			}
-		);
-		//@ts-ignore
-		super._createEditor(target, editorOptions, initialContent);
+	static get defaultOptions() {
+		const options = super.defaultOptions;
+		options.baseApplication = "JournalSheet";
+		//options.classes.push('custom-journal');
+		return options;
 	}
-	*/
+
 	//Include the option for the Drop Cap style in the editor styles' menu
 	activateEditor(name, options:any={}, ...args) {
 		options.style_formats.push(
