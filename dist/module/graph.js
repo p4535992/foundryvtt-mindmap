@@ -710,10 +710,13 @@ export class Graph {
     async _showEntity(uuid) {
         let entity = await fromUuid(uuid);
         // owned item
+        //@ts-ignore
         if (!entity.entity) {
             entity = new CONFIG.Item.entityClass(entity, null);
         }
+        //@ts-ignore
         if (entity.permission > CONST.ENTITY_PERMISSIONS.NONE) {
+            //@ts-ignore
             entity.sheet.render(true);
         }
     }
@@ -747,15 +750,21 @@ export class Graph {
         if (!this['_cy']) {
             return;
         }
+        //@ts-ignore
         if (udata.elements) {
+            //@ts-ignore
             const elements = udata.elements;
             this['_cy'].json({ elements });
         }
-        if (udata.layout)
+        //@ts-ignore
+        if (udata.layout) {
+            //@ts-ignore
             this['_layout'] = { ...this.defaultLayout, ...udata.layout };
+        }
         // Load layout if not already done
-        if (!this['_cy'].extension('layout', this['_layout'].name))
+        if (!this['_cy'].extension('layout', this['_layout'].name)) {
             await loadLayout(this['_layout'].name);
+        }
         this['_cy'].layout(this['_layout']).run();
         this['_cy'].resize();
         this['_cy'].fit();
@@ -792,8 +801,10 @@ export class Graph {
             ev.preventDefault();
             ev.stopPropagation();
             if (ev.key === 'Escape') {
+                //@ts-ignore
                 input.value = name;
             }
+            //@ts-ignore
             ev.currentTarget.blur();
         });
         // input.style.display = 'none';

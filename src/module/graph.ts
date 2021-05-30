@@ -827,12 +827,15 @@ export class Graph {
 	 * @param {string} uuid
 	 */
 	async _showEntity(uuid) {
-		let entity:any = await fromUuid(uuid);
+		let entity = await fromUuid(uuid);
 		// owned item
+		//@ts-ignore
 		if (!entity.entity){ 
 			entity = new CONFIG.Item.entityClass(entity,null);
 		}
+		//@ts-ignore
 		if (entity.permission > CONST.ENTITY_PERMISSIONS.NONE){
+			//@ts-ignore
 			entity.sheet.render(true);
 		}
 	}
@@ -864,21 +867,25 @@ export class Graph {
 	 * Updates the graph with given json data.
 	 * @param {Object} udata
 	 */
-	async update(udata:any = {}) {
+	async update(udata = {}) {
 		if (!this['_cy']){
-      return;
-    }
+		return;
+		}
+		//@ts-ignore
 		if (udata.elements) {
+			//@ts-ignore
 			const elements = udata.elements;
 			this['_cy'].json({elements});
 		}
-		if (udata.layout)
+		//@ts-ignore
+		if (udata.layout){
+			//@ts-ignore
 			this['_layout'] = {...this.defaultLayout, ...udata.layout};
-
+		}
 		// Load layout if not already done
-		if (!this['_cy'].extension('layout', this['_layout'].name))
+		if (!this['_cy'].extension('layout', this['_layout'].name)){
 			await loadLayout(this['_layout'].name);
-
+		}
 		this['_cy'].layout(this['_layout']).run();
 
 		this['_cy'].resize();
@@ -886,7 +893,7 @@ export class Graph {
 	}
 
 	async _modifyData(ele, dataName, type) {
-		let input:any = document.createElement('input');
+		let input = document.createElement('input');
 		const data = ele.data(dataName) || "";
 		input.value = data;
 		input.type = type;
@@ -916,10 +923,11 @@ export class Graph {
 			if (ev.key !== 'Escape' && ev.key !== 'Enter') return;
 			ev.preventDefault();
 			ev.stopPropagation();
-
 			if (ev.key === 'Escape'){
-         input.value = name;
-      }
+				//@ts-ignore
+				input.value = name;
+			}
+			//@ts-ignore
 			ev.currentTarget.blur();
 		});
 		// input.style.display = 'none';

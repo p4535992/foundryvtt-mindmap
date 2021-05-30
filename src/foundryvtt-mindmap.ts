@@ -35,7 +35,7 @@ export let i18nFormat = (key, data = {}) => {
   return game.i18n.format(key, data);
 }
 
-export let setDebugLevel = (debugText: string) => {
+export let setDebugLevel = (debugText) => {
   debugEnabled = {"none": 0, "warn": 1, "debug": 2, "all": 3}[debugText] || 0;
   // 0 = none, warnings = 1, debug = 2, all = 3
   if (debugEnabled >= 3) CONFIG.debug.hooks = true;

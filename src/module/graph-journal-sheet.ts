@@ -31,12 +31,13 @@ export class GraphJournalSheet extends JournalSheet {
 	static get defaultOptions() {
 		const options = super.defaultOptions;
 		options.baseApplication = "JournalSheet";
-		//options.classes.push('custom-journal');
+		options.classes.push('graph-journal');
 		return options;
 	}
 
 	//Include the option for the Drop Cap style in the editor styles' menu
-	activateEditor(name, options:any={}, ...args) {
+	activateEditor(name, options={}, ...args) {
+		//@ts-ignore
 		options.style_formats.push(
 			{
 				title: 'GraphJournalSheet Selection',
@@ -81,7 +82,7 @@ export class GraphJournalSheet extends JournalSheet {
 				class: "entry-graph",
 				icon: "fas fa-project-diagram",
 				//@ts-ignore
-				onclick: (ev:any) => this._onSwapMode(ev, "graph")
+				onclick: (ev) => this._onSwapMode(ev, "graph")
 			});
 		}
 

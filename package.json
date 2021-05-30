@@ -5,11 +5,13 @@
 	"description": "",
 	"scripts": {
 		"package": "gulp package",
-		"build": "gulp build && gulp link",
+		"build": "gulp build && gulp link && npx webpack",
 		"build:watch": "gulp watch",
 		"clean": "gulp clean && gulp copy --clean",
 		"watch": "webpack --watch",
-		"update": "npm install --save-dev @league-of-foundry-developers/foundry-vtt-types@fvtt-0.7.9"
+		"update": "npm install --save-dev @league-of-foundry-developers/foundry-vtt-types@fvtt-0.7.9",
+		"build-webpack": "npx webpack",
+    	"dev-webpack": "npx webpack --watch"
 	},
 	"author": "",
 	"license": "",

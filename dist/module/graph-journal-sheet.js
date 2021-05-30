@@ -24,11 +24,12 @@ export class GraphJournalSheet extends JournalSheet {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.baseApplication = "JournalSheet";
-        //options.classes.push('custom-journal');
+        options.classes.push('graph-journal');
         return options;
     }
     //Include the option for the Drop Cap style in the editor styles' menu
     activateEditor(name, options = {}, ...args) {
+        //@ts-ignore
         options.style_formats.push({
             title: 'GraphJournalSheet Selection',
             items: [
