@@ -58,12 +58,15 @@ Hooks.once('init', async () => {
 	await preloadTemplates();
 
 	// Register custom sheets (if any)
-  //CONFIG.JournalEntry.sheetClass = GraphJournalSheet;
+  //@ts-ignore
+  CONFIG.JournalEntry.sheetClass = GraphJournalSheet;
 
   // Creating the structure in CONFIG for Journals to have different sheets
   console.log("CustomJournals | Creating the structure to allow multiple Journal Sheets.")
-  CONFIG["JournalEntry"]["sheetClasses"] = {};
-  CONFIG["JournalEntry"]["sheetClasses"][CONST.BASE_ENTITY_TYPE] = {};
+  //@ts-ignore
+  //CONFIG.JournalEntry.sheetClass = {};
+  //@ts-ignore
+  //CONFIG.JournalEntry.sheetClass[CONST.BASE_ENTITY_TYPE] = {};
 
   console.log(`${MODULE_NAME} | Registering the module's sheets.`)
 
@@ -74,7 +77,7 @@ Hooks.once('init', async () => {
   // The default Foundry journal
   //@ts-ignore
   EntitySheetConfig.registerSheet(JournalEntry, "journals", GraphJournalSheet, {
-    // label: game.i18n.localize("custom-Journal.CustomJournalSheet"),
+    label: "GraphJournalSheet",
     types: [CONST.BASE_ENTITY_TYPE],
     makeDefault: false
   });

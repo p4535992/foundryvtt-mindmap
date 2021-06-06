@@ -35,25 +35,25 @@ export class GraphJournalSheet extends JournalSheet {
 		return options;
 	}
 
-	//Include the option for the Drop Cap style in the editor styles' menu
-	activateEditor(name, options={}, ...args) {
-		//@ts-ignore
-		options.style_formats.push(
-			{
-				title: 'GraphJournalSheet Selection',
-				items: [
-					{
-						title: 'GraphJournalSheet',
-						inline: 'span',
-						classes: 'drop-cap',
-						wrapper: false					
-					}
-				]
-			}
-		);
-		//@ts-ignore
-		super.activateEditor(name, options, ...args);
-	}
+	// //Include the option for the Drop Cap style in the editor styles' menu
+	// activateEditor(name, options={}, ...args) {
+	// 	//@ts-ignore
+	// 	options.style_formats.push(
+	// 		{
+	// 			title: 'GraphJournalSheet Selection',
+	// 			items: [
+	// 				{
+	// 					title: 'GraphJournalSheet',
+	// 					inline: 'span',
+	// 					classes: 'drop-cap',
+	// 					wrapper: false					
+	// 				}
+	// 			]
+	// 		}
+	// 	);
+	// 	//@ts-ignore
+	// 	super.activateEditor(name, options, ...args);
+	// }
 
 	/**
 	 * @override
