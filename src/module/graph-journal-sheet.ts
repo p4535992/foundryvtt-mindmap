@@ -1,32 +1,28 @@
 import { debug } from '../foundryvtt-mindmap';
 
 import { Graph } from './graph';
-import { MODULE_NAME } from './settings';
+import { FOUNDRYVTT_MINDMAP_MODULE_NAME } from './settings';
 //@ts-ignore
 export class GraphJournalSheet extends JournalSheet {
 
 	get template() {
 		if (this._sheetMode.toString() === "graph"){
-			return `/modules/${MODULE_NAME}/templates/graph-journal-sheet.html`;//"/modules/mindmap/templates/graph-journal-sheet.html";
+			return `/modules/${FOUNDRYVTT_MINDMAP_MODULE_NAME}/templates/graph-journal-sheet.html`;//"/modules/mindmap/templates/graph-journal-sheet.html";
 		}
 		return super.template;
 	}
-
-	// static get name() {
-	// 	return 'JournalSheet';
+	
+	// get journal(){
+	// 	return this.object;
 	// }
 
-	get journal(){
-		return this.object;
-	}
+	// get name() {
+	// 	return 'GraphJournalSheet';
+	// }
 
-	get name() {
-		return 'GraphJournalSheet';
-	}
-
-	get title() {
-		return 'GraphJournalSheet';
-	}
+	// get title() {
+	// 	return 'GraphJournalSheet';
+	// }
 
 	static get defaultOptions() {
 		const options = super.defaultOptions;
@@ -59,10 +55,9 @@ export class GraphJournalSheet extends JournalSheet {
 	 * @override
 	 */
 	_getHeaderButtons() {
-
     	const isOwner = this.object.owner,
 				atLeastLimited = this.object.hasPerm(game.user, "LIMITED"),
-				hasMindMap = !!this.object.getFlag(MODULE_NAME, 'data'),
+				hasMindMap = !!this.object.getFlag(FOUNDRYVTT_MINDMAP_MODULE_NAME, 'data'),
 				hasMultipleModes = this.object.data['img'] && this.object.data['content'];
 
 		// Set the empty element to some placeholder so the super functions adds the extra buttons
@@ -105,7 +100,7 @@ export class GraphJournalSheet extends JournalSheet {
 	//@ts-ignore
 	_inferDefaultMode() {
 		const hasImage = !!this.object.data['img'];
-		const hasMindmapElements = !!this.object.getFlag(MODULE_NAME, 'data.elements');
+		const hasMindmapElements = !!this.object.getFlag(FOUNDRYVTT_MINDMAP_MODULE_NAME, 'data.elements');
 
 		const otherwise = this.object.limited ? null : this.object.data['content'] ? "text" : hasMindmapElements ? "graph" : "text";
 		return hasImage ? "image" : otherwise;
@@ -190,17 +185,18 @@ export class GraphJournalSheet extends JournalSheet {
 	render(force = false, options= {}) {
 		debug('rendering sheet', options);
 		if (this.rendered && (!options['sheetMode'] || options['sheetMode'] === "graph") && this._sheetMode.toString() === "graph")	{
-			const udata = getProperty(options, "data.flags."+MODULE_NAME+".data");
+			const udata = getProperty(options, "data.flags."+FOUNDRYVTT_MINDMAP_MODULE_NAME+".data");
 			if (udata){
 				this['_graph'].update(udata);
-      }
+      		}
 			return this;
 		}
 		if (this['_graph']  && this['_graph']._cy){
 			this['_graph']._cy.destroy();
-    }
+    	}
 		return super.render(force, options);
 	}
+	
 	async _render(...args) {
 		await super._render(...args);
 
@@ -218,9 +214,9 @@ export class GraphJournalSheet extends JournalSheet {
 
 	setPosition(...args) {
 		const [left, top, width, height, scale] = args;
-			const ret = super.setPosition({left, top, width, height, scale});
-			if (this['_graph']){
-				this['_graph'].update();
+		const ret = super.setPosition({left, top, width, height, scale});
+		if (this['_graph']){
+			this['_graph'].update();
 		}
 		return ret;
 	}

@@ -1,4 +1,4 @@
-export const MODULE_NAME = 'foundryvtt-mindmap';
+export const FOUNDRYVTT_MINDMAP_MODULE_NAME = 'foundryvtt-mindmap';
 export const registerSettings = function () {
 };
 // function setup(templateSettings) {

@@ -1,5 +1,5 @@
 import { warn, error, debug, i18n } from "../foundryvtt-mindmap";
-import { MODULE_NAME } from "./settings";
+import { FOUNDRYVTT_MINDMAP_MODULE_NAME } from "./settings";
 
 export let readyHooks = async () => {
 

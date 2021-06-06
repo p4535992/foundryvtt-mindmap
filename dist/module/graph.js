@@ -1,5 +1,5 @@
 import { debug, log } from "../foundryvtt-mindmap.js";
-import { MODULE_NAME } from "./settings.js";
+import { FOUNDRYVTT_MINDMAP_MODULE_NAME } from "./settings.js";
 // // https://github.com/d3/d3
 // // import d3 from './libs/d3/d3.js';
 // import d3 from 'd3';
@@ -108,7 +108,7 @@ export class Graph {
         }
         const journal = this['_journal'];
         const container = this['_container'];
-        let json = journal.getFlag(MODULE_NAME, 'data') || { elements: {} };
+        let json = journal.getFlag(FOUNDRYVTT_MINDMAP_MODULE_NAME, 'data') || { elements: {} };
         if (!json.elements.nodes) {
             json.elements =
                 [
@@ -403,25 +403,25 @@ export class Graph {
             {
                 selector: '.journal-entry',
                 style: {
-                    'background-image': `/modules/${MODULE_NAME}/assets/open-book.png` //'modules/mindmap/assets/open-book.png'
+                    'background-image': `/modules/${FOUNDRYVTT_MINDMAP_MODULE_NAME}/assets/open-book.png` //'modules/mindmap/assets/open-book.png'
                 },
             },
             {
                 selector: '.actor',
                 style: {
-                    'background-image': `/modules/${MODULE_NAME}/assets/assets/person.png` //'modules/mindmap/assets/person.png'
+                    'background-image': `/modules/${FOUNDRYVTT_MINDMAP_MODULE_NAME}/assets/assets/person.png` //'modules/mindmap/assets/person.png'
                 },
             },
             {
                 selector: '.item',
                 style: {
-                    'background-image': `/modules/${MODULE_NAME}/assets/assets/suitcase.png` //'modules/mindmap/assets/suitcase.png'
+                    'background-image': `/modules/${FOUNDRYVTT_MINDMAP_MODULE_NAME}/assets/assets/suitcase.png` //'modules/mindmap/assets/suitcase.png'
                 },
             },
             {
                 selector: '.roll-table',
                 style: {
-                    'background-image': `/modules/${MODULE_NAME}/assets/assets/rolling-dices.png` //'modules/mindmap/assets/rolling-dices.png'
+                    'background-image': `/modules/${FOUNDRYVTT_MINDMAP_MODULE_NAME}/assets/assets/rolling-dices.png` //'modules/mindmap/assets/rolling-dices.png'
                 }
             },
             {
@@ -644,12 +644,12 @@ export class Graph {
     async saveDataToJournal() {
         debug('Saving Data...');
         // this._cy.one('layoutstop', ev => this._cy.animation({
-        // 		complete: this._journal.setFlag(MODULE_NAME, 'data', this._cy.json()),
+        // 		complete: this._journal.setFlag(FOUNDRYVTT_MINDMAP_MODULE_NAME, 'data', this._cy.json()),
         // 		fit: this._cy,
         // 		duration: 300
         // 	}).play()
         // );
-        // this._cy.one('layoutstop', ev => this._journal.setFlag(MODULE_NAME, 'data', this._cy.json()));
+        // this._cy.one('layoutstop', ev => this._journal.setFlag(FOUNDRYVTT_MINDMAP_MODULE_NAME, 'data', this._cy.json()));
         this['_cy'].nodes('.eh-ghost').remove();
         // Make sure "edges"  gets deleted!
         let elements = this['_cy'].json().elements;
@@ -676,7 +676,7 @@ export class Graph {
                 elements,
                 layout: this['_layout']
             };
-            this['_journal'].setFlag(MODULE_NAME, 'data', udata);
+            this['_journal'].setFlag(FOUNDRYVTT_MINDMAP_MODULE_NAME, 'data', udata);
         });
         this.update(udata);
     }

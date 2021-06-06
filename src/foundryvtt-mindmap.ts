@@ -14,7 +14,7 @@ import { Graph } from './module/graph.js';
 // Import TypeScript modules
 import { registerSettings } from './module/settings';
 import { preloadTemplates } from './module/preloadTemplates';
-import { MODULE_NAME } from './module/settings';
+import { FOUNDRYVTT_MINDMAP_MODULE_NAME } from './module/settings';
 import { initHooks, readyHooks } from './module/Hooks';
 
 import { GraphJournalSheet } from './module/graph-journal-sheet';
@@ -22,11 +22,11 @@ import { GraphJournalSheet } from './module/graph-journal-sheet';
 
 export let debugEnabled = 0;
 // 0 = none, warnings = 1, debug = 2, all = 3
-export let debug = (...args) => {if (debugEnabled > 1) console.log(`DEBUG:${MODULE_NAME} | `, ...args)};
-export let log = (...args) => console.log(`${MODULE_NAME} | `, ...args);
-export let warn = (...args) => {if (debugEnabled > 0) console.warn(`${MODULE_NAME} | `, ...args)};
-export let error = (...args) => console.error(`${MODULE_NAME} | `, ...args);
-export let timelog = (...args) => warn(`${MODULE_NAME} | `, Date.now(), ...args);
+export let debug = (...args) => {if (debugEnabled > 1) console.log(`DEBUG:${FOUNDRYVTT_MINDMAP_MODULE_NAME} | `, ...args)};
+export let log = (...args) => console.log(`${FOUNDRYVTT_MINDMAP_MODULE_NAME} | `, ...args);
+export let warn = (...args) => {if (debugEnabled > 0) console.warn(`${FOUNDRYVTT_MINDMAP_MODULE_NAME} | `, ...args)};
+export let error = (...args) => console.error(`${FOUNDRYVTT_MINDMAP_MODULE_NAME} | `, ...args);
+export let timelog = (...args) => warn(`${FOUNDRYVTT_MINDMAP_MODULE_NAME} | `, Date.now(), ...args);
 
 export let i18n = key => {
   return game.i18n.localize(key);
@@ -45,7 +45,7 @@ export let setDebugLevel = (debugText) => {
 /* Initialize module					*/
 /* ------------------------------------ */
 Hooks.once('init', async () => {
-	console.log(`${MODULE_NAME} | Initializing ${MODULE_NAME}`);
+	console.log(`${FOUNDRYVTT_MINDMAP_MODULE_NAME} | Initializing ${FOUNDRYVTT_MINDMAP_MODULE_NAME}`);
 
 	initHooks();
 	// Assign custom classes and constants here
@@ -58,9 +58,10 @@ Hooks.once('init', async () => {
 	await preloadTemplates();
 
 	// Register custom sheets (if any)
+
   //@ts-ignore
   CONFIG.JournalEntry.sheetClass = GraphJournalSheet;
-
+  
   // Creating the structure in CONFIG for Journals to have different sheets
   console.log("CustomJournals | Creating the structure to allow multiple Journal Sheets.")
   //@ts-ignore
@@ -68,7 +69,7 @@ Hooks.once('init', async () => {
   //@ts-ignore
   //CONFIG.JournalEntry.sheetClass[CONST.BASE_ENTITY_TYPE] = {};
 
-  console.log(`${MODULE_NAME} | Registering the module's sheets.`)
+  console.log(`${FOUNDRYVTT_MINDMAP_MODULE_NAME} | Registering the module's sheets.`)
 
   /*CUSTOMIZE
   * Here, register your sheet so it shows up properly in the dropdown, just change
@@ -101,7 +102,7 @@ Hooks.once('setup', function () {
   // }
 
   // Edit next line to match module.
-  // const module = game.modules.get(MODULE_NAME);
+  // const module = game.modules.get(FOUNDRYVTT_MINDMAP_MODULE_NAME);
   // const moduleId = module.id;
   // const title = module.data.title;
   // const moduleVersion = module.data.version;
@@ -150,7 +151,7 @@ Hooks.once('setup', function () {
 Hooks.once('ready', function () {
 	// // Do anything once the module is ready
 	// if (!game.modules.get("lib-wrapper")?.active && game.user.isGM){
-  //  	ui.notifications.error("The " + MODULE_NAME + " module requires to install and activate the 'libWrapper' module.");
+  //  	ui.notifications.error("The " + FOUNDRYVTT_MINDMAP_MODULE_NAME + " module requires to install and activate the 'libWrapper' module.");
 	// 	return;
 	// }
 

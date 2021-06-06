@@ -1,5 +1,15 @@
 <form class="{{cssClass}}" autocomplete="off">
-	<input name="name" type="text" value="{{entity.name}}" placeholder="Entry Title"/>
+    <input name="name" type="text" value="{{data.name}}" placeholder="Entry Title"/>
+
+    <select name="folder">
+        {{#select data.folder}}
+        <option value=""></option>
+        {{#each folders}}
+        <option value="{{this.id}}">{{this.name}}</option>
+        {{/each}}
+        {{/select}}
+    </select>
+
 	<div class='graph'>
 
 		<section class='graph-settings'>
@@ -17,4 +27,10 @@
 			</div>			
 		</section>
 	</div>
+
+    {{editor content=data.content target="content" button=true editable=editable owner=owner}}
+
+    {{#if editable}}
+    <button type="submit" name="submit"><i class="fas fa-feather-alt"></i> {{ localize "JOURNAL.Submit"}}</button>
+    {{/if}}
 </form>

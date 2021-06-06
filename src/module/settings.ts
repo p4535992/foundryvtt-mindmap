@@ -1,6 +1,6 @@
 import { debug, log, setDebugLevel, warn, i18n } from '../foundryvtt-mindmap';
 
-export const MODULE_NAME = 'foundryvtt-mindmap';
+export const FOUNDRYVTT_MINDMAP_MODULE_NAME = 'foundryvtt-mindmap';
 
 export const registerSettings = function () {
 
