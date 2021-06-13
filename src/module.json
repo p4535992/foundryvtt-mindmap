@@ -53,7 +53,8 @@
     "foundryvtt-mindmap.js"
   ],
   "styles": [
-    "module/libs/cytoscape-context-menus.js/cytoscape-context-menus.css"
+    "styles/graphs.css",
+    "styles/cytoscape-context-menus.css"
   ],
   "url": "https://github.com/p4535992/foundryvtt-mindmap",
   "manifest": "https://raw.githubusercontent.com/p4535992/foundryvtt-mindmap/master/src/module.json",

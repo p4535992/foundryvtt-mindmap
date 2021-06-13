@@ -24,12 +24,12 @@ export class GraphJournalSheet extends JournalSheet {
 	// 	return 'GraphJournalSheet';
 	// }
 
-	static get defaultOptions() {
-		const options = super.defaultOptions;
-		options.baseApplication = "JournalSheet";
-		options.classes.push('graph-journal');
-		return options;
-	}
+	// static get defaultOptions() {
+	// 	const options = super.defaultOptions;
+	// 	options.baseApplication = "JournalSheet";
+	// 	options.classes.push('graph-journal');
+	// 	return options;
+	// }
 
 	// //Include the option for the Drop Cap style in the editor styles' menu
 	// activateEditor(name, options={}, ...args) {
@@ -212,12 +212,13 @@ export class GraphJournalSheet extends JournalSheet {
 		});
 	}
 
-	setPosition(...args) {
-		const [left, top, width, height, scale] = args;
-		const ret = super.setPosition({left, top, width, height, scale});
-		if (this['_graph']){
-			this['_graph'].update();
-		}
-		return ret;
-	}
+	// setPosition(...args) {
+	// 	//const [left, top, width, height, scale] = args;
+	// 	//const ret = super.setPosition({left, top, width, height, scale});
+	// 	if (this['_graph']){
+	// 		this['_graph'].update();
+	// 	}
+	// 	//return ret;
+	// 	return super.setPosition(...args);
+	// }
 }

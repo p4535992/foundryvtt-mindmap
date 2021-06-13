@@ -18,10 +18,9 @@ In this view you organize you can create a network graph for organizing your rel
 
 I found on the project of 'Moerills' https://gitlab.com/moerills-fvtt-modules/graphs a very promising module but it's seems abbandonded.
 
-## If you are not a "Typescript developer" you can simply rename all the "ts" files in "js" and developing in javascript,
+### If you are not a "Typescript developer" you can simply rename all the "ts" files in "js" and developing in javascript,
 
-
-### [Checkout the bountyon trello](https://trello.com/c/gw9c7HKH/273-revive-mindmap-journal-graph-support)
+## if you are interested in the module, there are developers who would take it over for an appropriate fee and I invite you to join the [trello bounty](https://trello.com/c/gw9c7HKH/273-revive-mindmap-journal-graph-support)
 
 Additional (eventually on separate bounty)
 
