@@ -134,14 +134,15 @@ Art used as placeholder images for nodes does come from (game-icons.net)[https:/
 
 This project uses the [Foundry Project Creator](https://gitlab.com/foundry-projects/foundry-pc/create-foundry-project) by N. van Oosten. 
 
-## License
-This module is licensed under [GNU LGPL v3](https://raw.githubusercontent.com/p4535992/foundryvtt-mindmap/master/LICENSE) and Foundry Virtual Tabletops [Limited License Agreement For Module Development](https://foundryvtt.com/article/license/).
-
 ## [Changelog](./changelog.md)
 
 ## Issues
 
 Any issues, bugs, or feature requests are always welcome to be reported directly to the [Issue Tracker](https://github.com/p4535992/foundryvtt-mindmap/issues ), or using the [Bug Reporter Module](https://foundryvtt.com/packages/bug-reporter/).
+
+## License
+
+This package is under an [MIT license](LICENSE) and the [Foundry Virtual Tabletop Limited License Agreement for module development](https://foundryvtt.com/article/license/).
 
 ## Acknowledgements
 
